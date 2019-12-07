@@ -14,36 +14,39 @@ import java.util.Random;
 public class Avion {
     private enum TipoAvion{SMALL,MEDIUM,BIG};
     private Random rand = new Random();
+    private static int contadorAviones = 0;//para generar id unicos
+    
+    private int id;
     private TipoAvion tipo;
     private int pasajeros;
     private int turnosDesabordaje;
     private int turnosMantenimiento;
+    
+    private Pasajero[] listaPasajeros;
     public Avion(){
         //generar aleatoriamente el tipo de avion
-        
+        this.setId();
         this.randomTipo();
         this.randomPasajeros();
         if (this.tipo == TipoAvion.SMALL)
-            setTurnosDesabordaje(1);
+            this.setTurnosDesabordaje(1);
         if (this.tipo == TipoAvion.MEDIUM)
             this.setTurnosDesabordaje(2);
         if (this.tipo == TipoAvion.BIG)
             this.setTurnosDesabordaje(3);
         this.randomMantenimiento();
+        
+        this.listaPasajeros = new Pasajero[this.pasajeros];
+        this.initPasajeros();
     }
-    //to String de prueba, ¡no definitivo!
-    /*
-    public String toString(){
-        String tmpString = "";
-        if (this.tipo == TipoAvion.SMALL)
-            tmpString = "SMALL" + " " + this.pasajeros + " " + this.turnosMantenimiento;
-        if (this.tipo == TipoAvion.MEDIUM)
-            tmpString = "MEDIUM" + " " + this.pasajeros + " " + this.turnosMantenimiento;
-        if (this.tipo == TipoAvion.BIG)
-            tmpString = "BIG" + " " + this.pasajeros + " " + this.turnosMantenimiento;
-        return tmpString;
+    
+    private void initPasajeros(){
+        int i;
+        for (i = 0; i < this.listaPasajeros.length; i++){
+            this.listaPasajeros[i]  = new Pasajero();
+        }
     }
-    */
+    
     public void setTurnosDesabordaje(int t){
         this.turnosDesabordaje = t;
     }
@@ -54,6 +57,19 @@ public class Avion {
     
     public int getTurnosMantenimiento(){
         return this.turnosMantenimiento;
+    }
+    
+    public int getId(){
+        return this.id;
+    }
+    
+    public int getPasajeros(){
+        return this.pasajeros;
+    }
+    
+    private void setId(){
+        contadorAviones++;
+        this.id = contadorAviones;
     }
     
     private void randomTipo(){

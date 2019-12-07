@@ -10,12 +10,13 @@ package com.xhunik.proyecto1;
  * @author xhunik
  */
 public class Interfaz extends javax.swing.JFrame {
-
+    private Aereopuerto a;
     /**
      * Creates new form Intefaz
      */
     public Interfaz() {
         initComponents();
+        
     }
 
     /**
@@ -46,6 +47,11 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 480));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Turnos para finalizar:");
 
@@ -60,6 +66,11 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel6.setText("Tamaño de la fila de servicio:");
 
         jButton1.setText(">>");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Iniciar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,13 +162,29 @@ public class Interfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        //prueba de datos ¡arreglar despues!
-        //Avion a = new Avion();
-        //jTextArea1.append(a + "\n");
+        //boton Start
+              
+        a = new Aereopuerto(Integer.parseInt(jTextField1.getText()),
+        Integer.parseInt(jTextField2.getText()),
+        Integer.parseInt(jTextField3.getText()),
+        Integer.parseInt(jTextField4.getText()),
+        Integer.parseInt(jTextField5.getText()),
+        Integer.parseInt(jTextField6.getText()));
+        
+        
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        //boton siguiente
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -187,7 +214,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
