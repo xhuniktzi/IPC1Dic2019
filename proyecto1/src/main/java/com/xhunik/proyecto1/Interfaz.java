@@ -16,7 +16,7 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        
+        a = new Aereopuerto();
     }
 
     /**
@@ -165,15 +165,25 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         //boton Start
-              
-        a = new Aereopuerto(Integer.parseInt(jTextField1.getText()),
+        try{
+        if (!a.isExecute()){
+        a.setEnv(Integer.parseInt(jTextField1.getText()),
         Integer.parseInt(jTextField2.getText()),
         Integer.parseInt(jTextField3.getText()),
         Integer.parseInt(jTextField4.getText()),
         Integer.parseInt(jTextField5.getText()),
         Integer.parseInt(jTextField6.getText()));
         
-        
+        jTextArea1.append("Ejecucion iniciada\n");
+        }
+        else {
+            jTextArea1.append("Ya esta en ejecucion\n");
+        }
+        }
+        catch(NumberFormatException nfe){
+            jTextArea1.append("No dejes espacios en blanco, ");
+            jTextArea1.append("asegurate de solo utilizar numeros\n");
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -184,6 +194,12 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         //boton siguiente
+        if (a.isExecute()){
+            a.execute();
+        }
+        else {
+            jTextArea1.append("Asegurate de inicar primero\n");
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
