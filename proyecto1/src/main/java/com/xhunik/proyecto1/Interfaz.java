@@ -154,6 +154,9 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
+        //prueba de datos ¡arreglar despues!
+        //Avion a = new Avion();
+        //jTextArea1.append(a + "\n");
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
