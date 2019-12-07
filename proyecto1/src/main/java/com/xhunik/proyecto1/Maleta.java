@@ -17,4 +17,9 @@ public class Maleta {
         this.id = idM;
         
     }
+    public String getId(){
+        String str = "";
+        str = this.idPasajero + "-" + this.id;
+        return str;
+    }
 }

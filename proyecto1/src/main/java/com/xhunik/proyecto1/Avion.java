@@ -28,13 +28,14 @@ public class Avion {
         this.setId();
         this.randomTipo();
         this.randomPasajeros();
+        this.randomMantenimiento();
+        
         if (this.tipo == TipoAvion.SMALL)
             this.setTurnosDesabordaje(1);
         if (this.tipo == TipoAvion.MEDIUM)
             this.setTurnosDesabordaje(2);
         if (this.tipo == TipoAvion.BIG)
             this.setTurnosDesabordaje(3);
-        this.randomMantenimiento();
         
         this.listaPasajeros = new Pasajero[this.pasajeros];
         this.initPasajeros();
@@ -46,7 +47,9 @@ public class Avion {
             this.listaPasajeros[i]  = new Pasajero();
         }
     }
-    
+    public int getCantPasajeros(){
+        return this.pasajeros;
+    }
     public void setTurnosDesabordaje(int t){
         this.turnosDesabordaje = t;
     }
@@ -63,8 +66,8 @@ public class Avion {
         return this.id;
     }
     
-    public int getPasajeros(){
-        return this.pasajeros;
+    public Pasajero[] getPasajeros(){
+        return this.listaPasajeros;
     }
     
     private void setId(){

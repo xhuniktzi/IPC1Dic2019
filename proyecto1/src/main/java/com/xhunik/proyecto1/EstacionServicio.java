@@ -13,6 +13,8 @@ package com.xhunik.proyecto1;
 public class EstacionServicio{
     private Avion[] colaAviones;
     
-    public EstacionServicio(Avion a){/*Constructor vacio*/}
+    public EstacionServicio(int tColas){
+        this.colaAviones = new Avion[tColas];
+    }
 }
 

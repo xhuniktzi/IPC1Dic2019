@@ -17,6 +17,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         a = new Aereopuerto();
+        
     }
 
     /**
@@ -175,6 +176,7 @@ public class Interfaz extends javax.swing.JFrame {
         Integer.parseInt(jTextField6.getText()));
         
         jTextArea1.append("Ejecucion iniciada\n");
+        jTextArea1.append(a.getStatusAsStr());
         }
         else {
             jTextArea1.append("Ya esta en ejecucion\n");
@@ -196,6 +198,7 @@ public class Interfaz extends javax.swing.JFrame {
         //boton siguiente
         if (a.isExecute()){
             a.execute();
+            jTextArea1.append(a.getStatusAsStr());
         }
         else {
             jTextArea1.append("Asegurate de inicar primero\n");

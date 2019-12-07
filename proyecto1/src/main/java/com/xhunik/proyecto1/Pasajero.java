@@ -31,11 +31,15 @@ public class Pasajero {
         this.randomRegistro();
         
         this.listaMaletas = new Maleta[this.cantidadMaletas];
+        initMaletas();
+    }
+    public Maleta[] getMaletas(){
+        return this.listaMaletas;
     }
     
     private void initMaletas(){
         int i;
-        for (i = 0; i<this.listaMaletas.length; i++){
+        for (i = 0; i < this.listaMaletas.length; i++){
             this.listaMaletas[i] = new Maleta(this.id,i+1);
         }
     }

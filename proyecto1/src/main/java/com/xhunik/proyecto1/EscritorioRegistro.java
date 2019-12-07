@@ -12,5 +12,9 @@ package com.xhunik.proyecto1;
 public class EscritorioRegistro{
     private Pasajero[] colaPasajeros;
     
-    public EscritorioRegistro(){/*Constructor Vacio*/}
+    public EscritorioRegistro(int tColas){
+        this.colaPasajeros = new Pasajero[tColas];
+    }
+            
+    
 }
