@@ -40,7 +40,6 @@ public class Pasajero {
         else {
             this.setId(0);
             this.setDocumentos(0);
-            this.setMaletas(0);
             this.setRegistro(0);
         }
     }

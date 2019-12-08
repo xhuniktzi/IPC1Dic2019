@@ -29,7 +29,6 @@ public class EstacionServicio{
     public boolean addAvion(Avion a){
         if (this.tamaño > this.contenido){
             this.colaAviones[this.contenido].setId(a.getId());
-            this.colaAviones[this.contenido].setTurnosDesabordaje(a.getTurnosDesabordaje());
             this.colaAviones[this.contenido].setTurnosMantenimiento(a.getTurnosMantenimiento());
             this.contenido++;
             return true;

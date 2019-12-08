@@ -28,7 +28,6 @@ public class EscritorioRegistro{
         if (this.tamaño > this.contenido){
             this.colaPasajeros[this.contenido].setId(p.getId());
             this.colaPasajeros[this.contenido].setDocumentos(p.getCantidadDocumentos());
-            this.colaPasajeros[this.contenido].setMaletas(p.getCantidadMaletas());
             this.colaPasajeros[this.contenido].setRegistro(p.getTurnosRegistro());
             this.contenido++;
             return true;

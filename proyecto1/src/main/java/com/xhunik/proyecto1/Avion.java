@@ -43,7 +43,6 @@ public class Avion {
         }
         else {
         this.setId(0);
-        this.setPasajeros(0);
         this.setTurnosMantenimiento(0);
         }
     }
