@@ -30,6 +30,7 @@ public class EscritorioRegistro{
             this.colaPasajeros[this.contenido].setDocumentos(p.getCantidadDocumentos());
             this.colaPasajeros[this.contenido].setMaletas(p.getCantidadMaletas());
             this.colaPasajeros[this.contenido].setRegistro(p.getTurnosRegistro());
+            this.contenido++;
             return true;
         }
         else {
