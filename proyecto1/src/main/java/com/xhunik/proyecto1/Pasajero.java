@@ -29,6 +29,7 @@ public class Pasajero {
         this.randomDocumentos();
         this.randomMaletas();
         this.randomRegistro();
+        this.setId();
         
         this.listaMaletas = new Maleta[this.cantidadMaletas];
         initMaletas();
@@ -41,6 +42,7 @@ public class Pasajero {
         int i;
         for (i = 0; i < this.listaMaletas.length; i++){
             this.listaMaletas[i] = new Maleta(this.id,i+1);
+            
         }
     }
     public int getId(){
@@ -78,7 +80,7 @@ public class Pasajero {
         //el numero de turnos
         this.cantidadMaletas = (int)(rand.nextDouble()*(max-min+1)) + min;
     }
-            private void randomDocumentos(){
+        private void randomDocumentos(){
         int min = 1;
         int max = 10;
         //ejecuta una funcion matematica para obtener aleatoriamente

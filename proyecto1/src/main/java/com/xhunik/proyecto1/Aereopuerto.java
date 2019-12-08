@@ -17,7 +17,6 @@ public class Aereopuerto {
     private int cantMantenimiento;
     private int filaMantenimiento;
     private boolean flag = false;
-    private String strStatus = "";
     
     //contiene la lista de pasajeros que van a ingresar a las colas
     private Pasajero[] listaPasajeros; 
@@ -44,7 +43,7 @@ public class Aereopuerto {
         this.flag = true;
         this.listaAviones = new Avion[this.cantAviones];
         this.initColas();
-        
+        this.initAviones();
         //codigo a ejecutar en el inicio
         
         //fin codigo a ejecutar durante el inicio
@@ -56,22 +55,19 @@ public class Aereopuerto {
     
     public void execute(){
         if (this.turnos > 0){
-            this.strStatus += "turno numero: " + this.turnos + "\n";
+            
             //codigo a ejecutar en cada paso
             
             //fin codigo a ejecutar en cada paso
             this.turnos--;
-            this.strStatus += "Turnos restantes: " + this.turnos + "\n";
+            
         }
         else {
-            this.strStatus += "Ejecucion finalizada\n";
+            
             this.flag=false;
         }
     }
     
-    public String getStatusAsStr(){
-        return this.strStatus;
-    }
    
     
     private void initColas(){
@@ -90,6 +86,7 @@ public class Aereopuerto {
         int i;
         for (i = 0; i < this.listaAviones.length; i++){
             this.listaAviones[i] = new Avion();
+            
         }
     }
 }

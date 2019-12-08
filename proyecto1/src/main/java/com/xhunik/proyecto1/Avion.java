@@ -45,6 +45,7 @@ public class Avion {
         int i;
         for (i = 0; i < this.listaPasajeros.length; i++){
             this.listaPasajeros[i]  = new Pasajero();
+            
         }
     }
     public int getCantPasajeros(){
