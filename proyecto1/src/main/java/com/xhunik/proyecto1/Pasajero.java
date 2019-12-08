@@ -25,15 +25,27 @@ public class Pasajero {
     
     private Maleta listaMaletas[];
     
-    public Pasajero (){
-        this.randomDocumentos();
-        this.randomMaletas();
-        this.randomRegistro();
-        this.setId();
-        
-        this.listaMaletas = new Maleta[this.cantidadMaletas];
-        initMaletas();
+    //pasar boolean true signfica que debe crear un pasajero
+    //pasar boolean false significa que debe dejarlo con argumentos genericos
+    public Pasajero (boolean flag){
+        if (flag){
+            this.randomDocumentos();
+            this.randomMaletas();
+            this.randomRegistro();
+            this.setId();
+
+            this.listaMaletas = new Maleta[this.cantidadMaletas];
+            initMaletas();
+        }
+        else {
+            this.setId(0);
+            this.setDocumentos(0);
+            this.setMaletas(0);
+            this.setRegistro(0);
+        }
     }
+    
+    
     public Maleta[] getMaletas(){
         return this.listaMaletas;
     }
@@ -45,6 +57,7 @@ public class Pasajero {
             
         }
     }
+    
     public int getId(){
         return this.id;
     }
@@ -66,6 +79,10 @@ public class Pasajero {
         this.id = contadorPasajeros;
     }
     
+    public void setId(int id){
+        this.id = id;
+    }
+    
     private void randomRegistro(){
         int min = 1;
         int max = 3;
@@ -73,18 +90,31 @@ public class Pasajero {
         //el numero de turnos
         this.turnosRegistro = (int)(rand.nextDouble()*(max-min+1)) + min;
     }
-        private void randomMaletas(){
-        int min = 1;
-        int max = 4;
-        //ejecuta una funcion matematica para obtener aleatoriamente
-        //el numero de turnos
-        this.cantidadMaletas = (int)(rand.nextDouble()*(max-min+1)) + min;
+    
+    public void setRegistro(int registro){
+        this.turnosRegistro = registro;
     }
-        private void randomDocumentos(){
-        int min = 1;
-        int max = 10;
-        //ejecuta una funcion matematica para obtener aleatoriamente
-        //el numero de turnos
-        this.cantidadDocumentos = (int)(rand.nextDouble()*(max-min+1)) + min;
+    
+    private void randomMaletas(){
+    int min = 1;
+    int max = 4;
+    //ejecuta una funcion matematica para obtener aleatoriamente
+    //el numero de turnos
+    this.cantidadMaletas = (int)(rand.nextDouble()*(max-min+1)) + min;
+    }
+    
+    public void setMaletas(int maletas){
+        this.cantidadMaletas = maletas;
+    }
+    
+    private void randomDocumentos(){
+    int min = 1;
+    int max = 10;
+    //ejecuta una funcion matematica para obtener aleatoriamente
+    //el numero de turnos
+    this.cantidadDocumentos = (int)(rand.nextDouble()*(max-min+1)) + min;
+    }
+    public void setDocumentos(int documentos){
+        this.cantidadDocumentos = documentos;
     }
 }

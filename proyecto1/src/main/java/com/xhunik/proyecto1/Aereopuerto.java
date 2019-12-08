@@ -19,7 +19,7 @@ public class Aereopuerto {
     private boolean flag = false;
     
     //contiene la lista de pasajeros que van a ingresar a las colas
-    private Pasajero[] listaPasajeros; 
+    //private Pasajero[] listaPasajeros; 
     //contiene la lista de aviones por llegar
     private Avion[] listaAviones;
     //contiene las maletas de los pasajeros registrados, aplicar ordenamiento
@@ -54,39 +54,35 @@ public class Aereopuerto {
     }
     
     public void execute(){
+        
         if (this.turnos > 0){
-            
+            System.out.println("Turno: " + this.turnos);
             //codigo a ejecutar en cada paso
             
             //fin codigo a ejecutar en cada paso
             this.turnos--;
-            
-        }
-        else {
-            
-            this.flag=false;
+            System.out.println("Turnos restantes: " + this.turnos);
+            if (this.turnos == 0)
+                this.flag = false;
         }
     }
     
-   
-    
     private void initColas(){
-        int i;
+        
         this.areasMantenimiento = new EstacionServicio[this.cantMantenimiento];
         this.areasRegistro = new EscritorioRegistro[this.cantRegistro];
-        for (i = 0;i < this.areasMantenimiento.length;i++){
+        for (int i = 0;i < this.areasMantenimiento.length;i++){
             this.areasMantenimiento[i] = new EstacionServicio(this.filaMantenimiento);
         }
-        for (i = 0;i < this.areasRegistro.length;i++){
+        for (int i = 0;i < this.areasRegistro.length;i++){
             this.areasRegistro[i] = new EscritorioRegistro(this.filaRegistro);
         }
             
     }
     private void initAviones(){
-        int i;
-        for (i = 0; i < this.listaAviones.length; i++){
-            this.listaAviones[i] = new Avion();
-            
+        
+        for (int i = 0; i < this.listaAviones.length; i++){
+            this.listaAviones[i] = new Avion(true);
         }
     }
 }

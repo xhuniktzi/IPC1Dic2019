@@ -22,4 +22,10 @@ public class Maleta {
         str = this.idPasajero + "-" + this.id;
         return str;
     }
+    public int getIdMaleta(){
+        return this.id;
+    }
+    public int getIdPasajero(){
+        return this.idPasajero;
+    }
 }

@@ -23,28 +23,37 @@ public class Avion {
     private int turnosMantenimiento;
     
     private Pasajero[] listaPasajeros;
-    public Avion(){
+    public Avion(boolean flag){
         //generar aleatoriamente el tipo de avion
-        this.setId();
-        this.randomTipo();
-        this.randomPasajeros();
-        this.randomMantenimiento();
-        
-        if (this.tipo == TipoAvion.SMALL)
-            this.setTurnosDesabordaje(1);
-        if (this.tipo == TipoAvion.MEDIUM)
-            this.setTurnosDesabordaje(2);
-        if (this.tipo == TipoAvion.BIG)
-            this.setTurnosDesabordaje(3);
-        
-        this.listaPasajeros = new Pasajero[this.pasajeros];
-        this.initPasajeros();
+        if (flag){
+            this.setId();
+            this.randomTipo();
+            this.randomPasajeros();
+            this.randomMantenimiento();
+
+            if (this.tipo == TipoAvion.SMALL)
+                this.setTurnosDesabordaje(1);
+            if (this.tipo == TipoAvion.MEDIUM)
+                this.setTurnosDesabordaje(2);
+            if (this.tipo == TipoAvion.BIG)
+                this.setTurnosDesabordaje(3);
+
+            this.listaPasajeros = new Pasajero[this.pasajeros];
+            this.initPasajeros();
+        }
+        else {
+        this.setId(0);
+        this.setPasajeros(0);
+        this.setTurnosMantenimiento(0);
+        }
     }
-    
+    public void setTurnosMantenimiento(int turnos){
+        this.turnosMantenimiento = turnos;
+    }
     private void initPasajeros(){
         int i;
         for (i = 0; i < this.listaPasajeros.length; i++){
-            this.listaPasajeros[i]  = new Pasajero();
+            this.listaPasajeros[i]  = new Pasajero(true);
             
         }
     }
@@ -70,7 +79,9 @@ public class Avion {
     public Pasajero[] getPasajeros(){
         return this.listaPasajeros;
     }
-    
+    public void setId(int id){
+        this.id = id;
+    }
     private void setId(){
         contadorAviones++;
         this.id = contadorAviones;
@@ -91,6 +102,9 @@ public class Avion {
             this.tipo = TipoAvion.MEDIUM;
         if (rndTemp >= 0.55 && rndTemp <= 1)
             this.tipo = TipoAvion.BIG;
+    }
+    public void setTipo(Avion.TipoAvion tipo){
+        this.tipo = tipo;
     }
     
     private void randomPasajeros(){
@@ -113,6 +127,11 @@ public class Avion {
         //la cantidad de pasajeros
         this.pasajeros = (int)(rand.nextDouble()*(max-min+1)) + min;
     }
+    
+    public void setPasajeros(int pasajeros){
+        this.pasajeros = pasajeros;
+    }
+    
     public void randomMantenimiento(){
         //fijar los rangos segun el tipo de avion
         int min = 0;

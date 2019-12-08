@@ -197,8 +197,8 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         //boton siguiente
         if (a.isExecute()){
-            a.execute();
             jTextArea1.append("Paso\n");
+            a.execute();
         }
         else {
             jTextArea1.append("Asegurate de inicar primero\n");
