@@ -49,12 +49,20 @@ public class HojaDeTrabajo1 {
         
     }
 private static void ejercicio1(){
+    String temp;
+    int cantEnteros;
+    int cantDecimales;
     double var;
     System.out.print("Ingrese un numero: ");
         Scanner sc = new Scanner(System.in);
         var = sc.nextDouble();
         if (var % 1 != 0){
-            System.out.println("el numero es decimal");
+            temp = Double.toString(var);
+            cantEnteros = temp.indexOf('.');
+            cantDecimales = temp.length() - cantEnteros -1;
+            System.out.println("La cantidad de enteros es: " + cantEnteros);
+            System.out.println("La cantidad de decimales es: " + cantDecimales);
+            System.out.println("La cantidad de digitos es: " + (temp.length()-1));
         }
         else {
             if (var % 2 != 0){
