@@ -10,10 +10,10 @@ package com.xhunik.proyecto1;
  * @author xhunik
  */
 public class Maleta {
-    int idMaleta;
-    int idPasajero;
-    int UID;
-    boolean flag;
+    private int idMaleta;
+    private int idPasajero;
+    private int UID;
+    private boolean flag;
     
     public Maleta(int m, int p){
         idMaleta = m;
@@ -37,7 +37,7 @@ public class Maleta {
     public int getUID() {
         return UID;
     }
-    public boolean getFlag(){
+    public boolean isFlag(){
         return flag;
     }
 

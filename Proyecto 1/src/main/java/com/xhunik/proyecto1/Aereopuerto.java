@@ -137,7 +137,13 @@ public class Aereopuerto {
                 message("Turnos Restantes: " + colaAviones[i][0].getTurnosMantenimiento() + "\n");
                 message("**************************\n");
             }
-            
+            message("**************************\n");
+            message("Estado de las maletas\n");
+            message("**************************\n");
+            for (int i = 0; i < apuntadorMaletas;i++){
+                message(colaMaletas[i].getIdMaleta() + "-" + colaMaletas[i].getIdPasajero()+ "\n");
+            }
+                message("**************************\n");
             
             //ejecutar corrimiento de las colas
             for (int i = 0; i < cantEscritoriosRegistro; i++){
@@ -179,8 +185,8 @@ public class Aereopuerto {
                     message("Desabordando avion " + a.getId() + " en: " + turnosOcupadosDesabordando + " turnos mas" + "\n");
                     System.out.println("Pasajeros a bordo: " + a.getCantPasajeros());
                     message("Pasajeros a bordo: " + a.getCantPasajeros() + "\n");
-                    System.out.println("Tipo de avion: "+ a.tipo);
-                    message("Tipo de avion: "+ a.tipo + "\n\n");
+                    System.out.println("Tipo de avion: "+ a.getTipo());
+                    message("Tipo de avion: "+ a.getTipo() + "\n\n");
                     message("**************************\n");
                     avionDesabordando = true;
                     
@@ -223,6 +229,7 @@ public class Aereopuerto {
                     while (colaMaletas[0].getUID() == 0){
                         moveOneItemMaleta();
                     }
+                    
                     apuntadorMaletas++;
                     message("Maletas ordenadas segun Pasajero y id\n");
                     for (int i = 0; i < apuntadorMaletas;i++){
@@ -274,7 +281,7 @@ public class Aereopuerto {
     public boolean addColaPasajeros(Pasajero p){
         for (int j = 0; j < sizeFilaRegistro; j++){
             for (int i = 0; i < cantEscritoriosRegistro;i++){
-                if (!colaPasajeros[i][j].flag){
+                if (!colaPasajeros[i][j].isFlag()){
                     colaPasajeros[i][j] = p;
                     return true;
                 }
@@ -285,7 +292,7 @@ public class Aereopuerto {
     public boolean addColaAviones(Avion a){
         for (int j = 0; j < sizeFilaServicio; j++){
             for (int i = 0; i < cantEstacionesServicio;i++){
-                if (!colaAviones[i][j].flag){
+                if (!colaAviones[i][j].isFlag()){
                     colaAviones[i][j] = a;
                     return true;
                 }
@@ -296,7 +303,7 @@ public class Aereopuerto {
     public boolean addColaMaletas(Maleta m){
 
         for (int i = 0; i < longitudMaletas;i++){
-            if (!colaMaletas[i].flag){
+            if (!colaMaletas[i].isFlag()){
                 colaMaletas[i] = m;
                 apuntadorMaletas++;
                 //contadorMaletas++;
@@ -333,7 +340,7 @@ public class Aereopuerto {
     
     public void moveOneItemMaleta(){
         Maleta maletaVacia = new Maleta(false);
-        for (int i = 0; i < apuntadorMaletas; i++){
+           for (int i = 0; i < apuntadorMaletas; i++){
             if (i < (apuntadorMaletas)){
                 colaMaletas[i] = colaMaletas[i+1];
                 

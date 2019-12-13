@@ -12,12 +12,12 @@ import java.util.Random;
  * @author xhunik
  */
 public class Pasajero {
-    static int idContador = 0;
-    int id;
-    int turnosRegistro;
-    int documentos;
-    int maletas;
-    boolean flag;
+    private static int idContador = 0;
+    private int id;
+    private int turnosRegistro;
+    private int documentos;
+    private int maletas;
+    private boolean flag;
 
     Random rand;
     public Pasajero() {

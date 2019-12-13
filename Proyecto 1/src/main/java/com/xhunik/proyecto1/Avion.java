@@ -11,15 +11,15 @@ import java.util.Random;
  * @author xhunik
  */
 public class Avion {
-    static int idContador = 0;
+    private static int idContador = 0;
     
-    int id;
-    Random rand;
-    TipoAvion tipo;
-    int cantPasajeros;
-    int turnosDesabordaje;
-    int turnosMantenimiento;
-    boolean flag;
+    private int id;
+    private Random rand;
+    private TipoAvion tipo;
+    private int cantPasajeros;
+    private int turnosDesabordaje;
+    private int turnosMantenimiento;
+    private boolean flag;
     
     public Avion() {
         rand = new Random();
@@ -94,6 +94,10 @@ public class Avion {
 
     public boolean isFlag() {
         return flag;
+    }
+
+    public TipoAvion getTipo() {
+        return tipo;
     }
     
     
