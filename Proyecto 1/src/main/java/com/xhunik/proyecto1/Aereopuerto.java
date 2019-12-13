@@ -207,6 +207,7 @@ public class Aereopuerto {
                     message("**************************\n");
                     message("\t Estado de las maletas\n");
                     message("**************************\n");
+                    
                     if (apuntadorMaletas == 0){
                         System.out.println("No hay maletas en el sistema");
                         message("No hay maletas en el sistema\n");
@@ -214,10 +215,13 @@ public class Aereopuerto {
                     else {
                         message("Actualmente hay: " + apuntadorMaletas /*contadorMaletas*/ + " maletas en el sistema\n");
                         System.out.println("Actualmente hay: " + apuntadorMaletas /* contadorMaletas */ + " maletas en el sistema\n");
+                        /*
                         for (int i = 0; i < apuntadorMaletas;i++){
                             System.out.println("\tUID:" + colaMaletas[i].getUID());
                         }
+                        */
                     }
+                            
                     message("**************************\n");
                     message("Maleta: id - id del pasajero\n");
                     message("Cola de maletas antes de aplicar ordenamiento\n");
@@ -231,6 +235,9 @@ public class Aereopuerto {
                     }
                     
                     apuntadorMaletas++;
+                    
+                    
+                    
                     message("Maletas ordenadas segun Pasajero y id\n");
                     for (int i = 0; i < apuntadorMaletas;i++){
                         message(colaMaletas[i].getIdMaleta() + "-" + colaMaletas[i].getIdPasajero()+ "\n");
@@ -278,39 +285,40 @@ public class Aereopuerto {
     public int getTurnos() {
         return turnos;
     }
-    public boolean addColaPasajeros(Pasajero p){
+    public void addColaPasajeros(Pasajero p){
         for (int j = 0; j < sizeFilaRegistro; j++){
             for (int i = 0; i < cantEscritoriosRegistro;i++){
                 if (!colaPasajeros[i][j].isFlag()){
                     colaPasajeros[i][j] = p;
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
+        return;
     }
-    public boolean addColaAviones(Avion a){
+    
+    public void addColaAviones(Avion a){
         for (int j = 0; j < sizeFilaServicio; j++){
             for (int i = 0; i < cantEstacionesServicio;i++){
                 if (!colaAviones[i][j].isFlag()){
                     colaAviones[i][j] = a;
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
+        return;
     }
-    public boolean addColaMaletas(Maleta m){
+    public void addColaMaletas(Maleta m){
 
         for (int i = 0; i < longitudMaletas;i++){
             if (!colaMaletas[i].isFlag()){
                 colaMaletas[i] = m;
                 apuntadorMaletas++;
                 //contadorMaletas++;
-                return true;
+                return;
             }
         }
-        return false;
+        return;
     }
 
     
