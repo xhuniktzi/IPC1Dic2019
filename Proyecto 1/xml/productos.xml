@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+	<producto nombre="Vehiculo wolsvagen" precio="50000.00" descripcion="vehiculo para dos personas" imagen="Imagenes\wolsvagen.png">
+		<insumo nombre="llanta" codigo="1">4</insumo>
+		<insumo nombre="puerta" codigo="2">2</insumo>
+		<insumo nombre="motor" codigo="3">1</insumo>
+		<insumo nombre="Carroceria" codigo="4">1</insumo>
+		<insumo nombre="bateria" codigo="5">1</insumo>
+	</producto>
+	<producto nombre="Camion Hyundai" precio="100000.00" descripcion="camion para transporte" imagen="Imagenes\camion.jpg">
+		<insumo nombre="llanta" codigo="1">8</insumo>
+		<insumo nombre="puerta" codigo="2">2</insumo>
+		<insumo nombre="motor" codigo="3">1</insumo>
+		<insumo nombre="Carroceria" codigo="4">1</insumo>
+		<insumo nombre="bateria" codigo="5">1</insumo>
+	</producto>
+	<producto nombre="Motocicleta suzuki" precio="10000.00" descripcion="motocicleta marca suzuki" imagen="Imagenes\moto.png">
+		<insumo nombre="llanta" codigo="1">2</insumo>
+		<insumo nombre="motor" codigo="3">1</insumo>
+		<insumo nombre="Carroceria" codigo="4">1</insumo>
+		<insumo nombre="bateria" codigo="5">1</insumo>
+	</producto>
+	<producto nombre="Vehiculo mazda" precio="80000.00" descripcion="vehiculo para cinco personas" imagen="Imagenes\mazda.png">
+		<insumo nombre="llanta" codigo="1">4</insumo>
+		<insumo nombre="puerta" codigo="2">4</insumo>
+		<insumo nombre="motor" codigo="3">1</insumo>
+		<insumo nombre="Carroceria" codigo="4">1</insumo>
+		<insumo nombre="bateria" codigo="5">1</insumo>
+	</producto>
+</productos>

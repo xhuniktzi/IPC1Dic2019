@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<insumos>
+	<insumo id="1">
+		<nombre>llanta</nombre>
+		<cantidad>50</cantidad>
+		<minimo>4</minimo>
+		<maximo>100</maximo>
+		<costo>150.00</costo>
+		<descripcion>llantas para vehiculos</descripcion>
+		<imagen>Imagenes\llanta.png</imagen>
+	</insumo>
+	<insumo id="2">
+		<nombre>puerta</nombre>
+		<cantidad>30</cantidad>
+		<minimo>2</minimo>
+		<maximo>30</maximo>
+		<costo>400.00</costo>
+		<descripcion>puertas para vehiculo</descripcion>
+		<imagen>Imagenes\puerta.jpg</imagen>
+	</insumo>
+	<insumo id="3">
+		<nombre>Motor</nombre>
+		<cantidad>10</cantidad>
+		<minimo>2</minimo>
+		<maximo>15</maximo>
+		<costo>1200</costo>
+		<descripcion>Motor para vehiculo</descripcion>
+		<imagen>Imagenes\Motor.jpg</imagen>
+	</insumo>
+	<insumo id="4">
+		<nombre>Carroceria</nombre>
+		<cantidad>20</cantidad>
+		<minimo>1</minimo>
+		<maximo>20</maximo>
+		<costo>5000.00</costo>
+		<descripcion>Carroceria para vehiculos</descripcion>
+		<imagen>Imagenes\carroceria.jpg</imagen>
+	</insumo>
+	<insumo id="5">
+		<nombre>bateria</nombre>
+		<cantidad>30</cantidad>
+		<minimo>5</minimo>
+		<maximo>40</maximo>
+		<costo>300</costo>
+		<descripcion>bateria para vehiculos</descripcion>
+		<imagen>Imagenes\bateria.jpg</imagen>
+	</insumo>
+</insumos>
