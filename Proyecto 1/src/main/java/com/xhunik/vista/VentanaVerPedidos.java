@@ -6,6 +6,7 @@
 package com.xhunik.vista;
 
 import com.xhunik.controladores.App;
+import com.xhunik.vista.eventsMenu.eventBuscarPedido;
 import com.xhunik.vista.eventsMenu.eventMostrarPedidos;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -25,6 +26,7 @@ public class VentanaVerPedidos extends JFrame {
     public static JPanel panelMostrar;
     public static JTextField fieldBuscar;    
     public static boolean flagDialog;
+    public static boolean flagDialog2;
     public VentanaVerPedidos() throws HeadlessException {
         super("Ver Pedidos");
         setSize(new Dimension(720,600));
@@ -45,7 +47,7 @@ public class VentanaVerPedidos extends JFrame {
         fieldBuscar = new JTextField(30);
         panelSearch.add(fieldBuscar);
         JButton botonBuscar = new JButton("Buscar");
-        //botonBuscar.addActionListener(new eventMostrarPedidos());
+        botonBuscar.addActionListener(new eventBuscarPedido());
         panelSearch.add(botonBuscar);
         
         int n = 0;
