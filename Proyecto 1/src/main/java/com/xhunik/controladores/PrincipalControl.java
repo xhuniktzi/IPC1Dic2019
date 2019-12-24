@@ -10,9 +10,6 @@ import com.xhunik.internal.ListaInsumo;
 
 import com.xhunik.internal.ListaProducto;
 
-
-
-
 /**
  *
  * @author xhunik

@@ -5,6 +5,8 @@
  */
 package com.xhunik.internal;
 
+import com.xhunik.controladores.App;
+
 /**
  *
  * @author xhunik
@@ -46,6 +48,14 @@ public class Pedido {
     }
     public void addNuevoProducto(Producto p){
         listaProductosComprados.addProducto(p);
+    }
+    
+    public double calculatePrecioProducto(){
+        double data = 0.0;
+        for (int i = 0; i < listaProductosComprados.getSize(); i++){
+            data += App.control.getGestor().getProductosDisponibles().searchProductoByID(listaProductosComprados.getProductoByIndex(i).getId()).getPrecio();
+        }
+        return data;
     }
     
     @Override

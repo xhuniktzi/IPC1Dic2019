@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
  * @author xhunik
  */
 public class eventVerPedidos implements ActionListener{
-    public VentanaVerPedidos ventanaPedidos;
+    public static VentanaVerPedidos ventanaPedidos;
     @Override
     public void actionPerformed(ActionEvent e){
         if (!Ventana.flagVerPedidos){
