@@ -21,8 +21,6 @@ public class PrincipalControl {
     
     public PrincipalControl(){
         gestor = new Gestor();
-        gestor.loadProductosFromXML("./xml/productos.xml");
-        gestor.getInventario().loadInsumosFromXML("./xml/insumos.xml");
         dinero = 0.0;
     }
     public boolean executeSellById(int id){

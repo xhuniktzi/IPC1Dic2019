@@ -5,6 +5,7 @@
  */
 package com.xhunik.vista;
 
+import com.xhunik.controladores.App;
 import com.xhunik.vista.eventsMenu.*;
 
 import java.awt.BorderLayout;
@@ -12,8 +13,12 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,7 +60,7 @@ public class Ventana extends JFrame {
         panelMostrar.add(cantidadGanancias);
         
         JPanel panelBotones = new JPanel();
-        panelBotones.setBounds(0,60, 720, 420);
+        panelBotones.setBounds(0,60, 720, 460);
         panelBotones.setLayout(null);
         
         JButton botonRegistrarInsumos = new JButton("Registrar Insumos");
@@ -83,8 +88,43 @@ public class Ventana extends JFrame {
         botonVender.addActionListener(new eventVender());
         panelBotones.add(botonVender);
         
+        JPanel contenedorCarga = new JPanel();
+        contenedorCarga.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton botonCargaMasivaI = new JButton("Cargar Insumos desde XML");
+        botonCargaMasivaI.addActionListener(new eventCargaInsumo());
+        contenedorCarga.add(botonCargaMasivaI);
+        JButton botonCargaMasivaP = new JButton("Cargar Productos desde XML");
+        botonCargaMasivaP.addActionListener(new eventCargaProducto());
+        contenedorCarga.add(botonCargaMasivaP);
+        
+        
         contenedor.add(panelMostrar,BorderLayout.NORTH);
         contenedor.add(panelBotones,BorderLayout.CENTER);
+        contenedor.add(contenedorCarga, BorderLayout.SOUTH);
     }
 }
 //Finaliza Dibujado de ventana
+
+class eventCargaProducto implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser cargaArchivos = new JFileChooser();
+        cargaArchivos.showOpenDialog(App.mainVentana);
+        File file = cargaArchivos.getSelectedFile();
+        App.control.getGestor().loadProductosFromXML(file.getAbsolutePath());
+    }
+    
+}
+
+class eventCargaInsumo implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser cargaArchivos = new JFileChooser();
+        cargaArchivos.showOpenDialog(App.mainVentana);
+        File file = cargaArchivos.getSelectedFile();
+        App.control.getGestor().getInventario().loadInsumosFromXML(file.getAbsolutePath());
+    }
+    
+}

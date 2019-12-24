@@ -11,6 +11,7 @@ import static com.xhunik.vista.VentanaVender.cuadriculaBotones;
 import static com.xhunik.vista.VentanaVender.panelMostrar;
 import com.xhunik.vista.eventsMenu.eventBuscarProducto;
 import com.xhunik.vista.eventsMenu.eventOrdenarProducto;
+import com.xhunik.vista.eventsMenu.eventVender;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -108,8 +109,12 @@ class eventoPulsarBoton implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        App.control.executeSellById(id);
-        Ventana.cantidadGanancias.setText(String.valueOf(App.control.getDinero()));
+        if (!App.control.executeSellById(id)){
+            JOptionPane.showMessageDialog(eventVender.ventanaVender, "No se puede completar la venta, no hay sufiencentes inusmos", "alerta", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Ventana.cantidadGanancias.setText(String.valueOf(App.control.getDinero()));
+        }
+        
     }
     
 }
