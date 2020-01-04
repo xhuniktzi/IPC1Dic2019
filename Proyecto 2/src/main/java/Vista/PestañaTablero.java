@@ -65,8 +65,8 @@ public class PestañaTablero extends JPanel{
             columna.setBorder(border);
             
             columna.setLayout(new BorderLayout());
-            columna.setSize(300,480);
-            columna.setLocation(i*300, 0);
+            columna.setSize(240,480);
+            columna.setLocation(i*240, 0);
             
             JPanel botonesColumnas = new JPanel();
             botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
