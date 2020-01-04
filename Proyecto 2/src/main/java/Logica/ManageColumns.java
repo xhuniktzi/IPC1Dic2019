@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Exceptions.InvalidTitleCardException;
 import Exceptions.ListaVaciaException;
 import Logica.Elements.Tarjeta;
 
@@ -14,7 +15,8 @@ import Logica.Elements.Tarjeta;
  */
 public interface ManageColumns {
     //public int contador;
-    public abstract void add(Tarjeta t);
+    public abstract void add(Tarjeta t) throws InvalidTitleCardException;
     public abstract Tarjeta delete() throws ListaVaciaException;
     public abstract Tarjeta[] getArrayDataTarjetas();
+    public abstract Tarjeta getTarjetaByTitle(String title);
 }

@@ -5,6 +5,7 @@
  */
 package Logica.Elements;
 
+import Exceptions.InvalidTitleCardException;
 import Exceptions.ListaVaciaException;
 import Exceptions.TitleCardVacioException;
 import Logica.Containers.TarjetasCola;
@@ -39,7 +40,7 @@ public class Columna {
         this(nombre,Mode.DOBLE);
     }
     
-    public void addTarjeta(Tarjeta t) throws TitleCardVacioException {
+    public void addTarjeta(Tarjeta t) throws TitleCardVacioException,InvalidTitleCardException {
         if (t.title.equals(""))
             throw new TitleCardVacioException();
         
@@ -48,6 +49,10 @@ public class Columna {
     
     public Tarjeta deleteTarjeta() throws ListaVaciaException{
         return tarjetas.delete();
+    }
+    
+    public Tarjeta getTarjetaByTitle(String title){
+        return tarjetas.getTarjetaByTitle(title);
     }
     
     public static enum Mode{

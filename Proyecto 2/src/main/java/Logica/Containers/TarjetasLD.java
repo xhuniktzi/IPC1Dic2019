@@ -5,7 +5,9 @@
  */
 package Logica.Containers;
 
+import Exceptions.InvalidTitleCardException;
 import Exceptions.ListaVaciaException;
+import Exceptions.TarjetaNotFoundException;
 import Logica.Elements.Tarjeta;
 import Logica.EspecNodos.NodoTarjetaLD;
 import Logica.ManageColumns;
@@ -21,7 +23,7 @@ public class TarjetasLD implements ManageColumns{
     public String nombre;
     
     @Override
-    public void add(Tarjeta t) {
+    public void add(Tarjeta t) throws InvalidTitleCardException {
         insertarAlFrente(t);
     }
 
@@ -43,17 +45,20 @@ public class TarjetasLD implements ManageColumns{
     }
     
     //false si no existe, true si si existe
-    public boolean checkExistsNickname(String nick){
+    public boolean checkExistsByTitle(String title){
         NodoTarjetaLD act = ini;
         while (act != null){
-            if (act.dato.title.equals(nick))
+            if (act.dato.title.equals(title))
                 return true;
-            act =act.sig;
+            act = act.sig;
         }
         return false;
     }
     
-    public void insertarAlFrente(Tarjeta dato){
+    public void insertarAlFrente(Tarjeta dato) throws InvalidTitleCardException {
+        if (checkExistsByTitle(dato.title))
+            throw new InvalidTitleCardException();
+        
         if (estaVacia())
             ini = end = new NodoTarjetaLD(dato);
         else
@@ -62,7 +67,10 @@ public class TarjetasLD implements ManageColumns{
         contador++;
     }
     
-    public void insertarAlFinal(Tarjeta dato){
+    public void insertarAlFinal(Tarjeta dato) throws InvalidTitleCardException {
+        if (checkExistsByTitle(dato.title))
+            throw new InvalidTitleCardException();
+        
         if (estaVacia())
             ini = end = new NodoTarjetaLD(dato);
         else
@@ -118,6 +126,21 @@ public class TarjetasLD implements ManageColumns{
         return retorno;
     }
 
+    @Override
+    public Tarjeta getTarjetaByTitle(String title) throws ListaVaciaException, TarjetaNotFoundException {
+        if (estaVacia())
+            throw new ListaVaciaException(nombre);
+        NodoTarjetaLD act = ini;
+        while (act != null){
+            if (act.dato.title.equals(title))
+                return act.dato;
+            act =act.sig;
+        }
+        throw new TarjetaNotFoundException();
+    }
+
+    
+    
     @Override
     public Tarjeta[] getArrayDataTarjetas() {
         return getArrayTarjeta();

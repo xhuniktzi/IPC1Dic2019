@@ -7,6 +7,7 @@ package Logica;
 
 import Exceptions.InvalidNameColException;
 import Exceptions.InvalidNickException;
+import Exceptions.InvalidTitleCardException;
 import Exceptions.InvalidTitleTabException;
 import Exceptions.ListaVaciaException;
 import Exceptions.TabNotFoundException;
@@ -15,6 +16,7 @@ import Logica.Containers.ColaboradoresLS;
 import Logica.Containers.TablerosCS;
 import Logica.Elements.Colaborador;
 import Logica.Elements.Columna;
+import Logica.Elements.Comentario;
 import Logica.Elements.Tablero;
 import Logica.Elements.Tarjeta;
 import java.io.BufferedReader;
@@ -132,16 +134,13 @@ public class Gestor {
                 try{
                 //verificar si no esta vacia
                     if (elements[6].contains("alta")){
-                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.ALTA,elements[5]));
-                        //agregar comentario
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.ALTA,elements[5]));    
                     }
                     if (elements[6].contains("media")){
                         col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.MEDIA,elements[5]));
-                        //agregar comentario
                     }
                     if (elements[6].contains("baja")){
                         col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.BAJA,elements[5]));
-                        //agregar comentario
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe){
                     //System.err.println("Crea columna -> no añade tarjeta" + col.nombre);
@@ -155,15 +154,12 @@ public class Gestor {
                 //verificar si no esta vacia
                     if (elements[6].contains("alta")){
                         col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.ALTA,elements[5]));
-                        //agregar comentario
                     }
                     if (elements[6].contains("media")){
                         col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.MEDIA,elements[5]));
-                        //agregar comentario
                     }
                     if (elements[6].contains("baja")){
                         col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.BAJA,elements[5]));
-                        //agregar comentario
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe){
                     //System.err.println("No Crea columna -> no añade tarjeta");

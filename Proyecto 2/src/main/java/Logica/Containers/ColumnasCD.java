@@ -11,6 +11,7 @@ import Exceptions.ListaVaciaException;
 import Exceptions.NameColVacioException;
 import Logica.Elements.Columna;
 import Logica.Elements.Tablero;
+import Logica.Elements.Tarjeta;
 import Logica.EspecNodos.NodoColumnaCD;
 import java.io.File;
 import java.io.FileWriter;
@@ -111,6 +112,8 @@ public class ColumnasCD {
         
     }
    
+
+
     
     //get columna by title
     public Columna getColumnaByName(String name) throws ListaVaciaException,ColumnaNotFoundException {

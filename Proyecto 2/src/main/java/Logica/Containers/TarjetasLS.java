@@ -6,7 +6,9 @@
 package Logica.Containers;
 
 
+import Exceptions.InvalidTitleCardException;
 import Exceptions.ListaVaciaException;
+import Exceptions.TarjetaNotFoundException;
 
 import Logica.Elements.Tarjeta;
 import Logica.EspecNodos.NodoTarjetaLS;
@@ -28,16 +30,24 @@ public class TarjetasLS {
     public TarjetasLS(){
         this("mi lista");
     }
-    public void insertarAlFrente(Tarjeta dato){
-        contador++;
+    public void insertarAlFrente(Tarjeta dato) throws InvalidTitleCardException {
+        if(checkExistsTitle(dato.title))
+            throw new InvalidTitleCardException();
+        
+        
         if (estaVacia())
             ini = new NodoTarjetaLS(dato);
         else
             ini = new NodoTarjetaLS(dato, ini);
+        
+        contador++;
     }
     
-    public void insertarAlFinal(Tarjeta dato){
-        contador++;
+    public void insertarAlFinal(Tarjeta dato) throws InvalidTitleCardException {
+        if(checkExistsTitle(dato.title))
+            throw new InvalidTitleCardException();
+        
+        
         if (estaVacia())
             ini = new NodoTarjetaLS(dato);
         else{
@@ -48,6 +58,7 @@ public class TarjetasLS {
                 act = act.sig;
             }while (act != null);
             ant.sig = act = new NodoTarjetaLS(dato, null);
+            contador++;
         }
         
     }
@@ -90,7 +101,18 @@ public class TarjetasLS {
         contador--;
         return dato;
     }
-    
+     public Tarjeta getTarjetaByTitle(String title) throws ListaVaciaException, TarjetaNotFoundException {
+        if (estaVacia()) 
+            throw new ListaVaciaException(nombre);
+         
+        NodoTarjetaLS act = ini;
+        while (act != null){
+            if (act.dato.title.equals(title) )
+                return act.dato;
+            act = act.sig;
+        }
+        throw new TarjetaNotFoundException();
+    }
     
     public boolean estaVacia(){
         return (ini == null);
