@@ -54,7 +54,6 @@ public class PestañaTablero extends JPanel{
             content.setBackground(Color.decode(tab.hexColor));
         }
         catch(NumberFormatException nfe){
-            nfe.printStackTrace();
         }
         content.setLayout(null);
         Tablero tablero = App.gestor.getTablerosByTitle(tab.nombre);
@@ -104,7 +103,6 @@ public class PestañaTablero extends JPanel{
                 }
             }
             catch (ListaVaciaException lve){
-                lve.printStackTrace();
             }
                 
             columna.add(new JLabel(cols[i].nombre+" - "+cols[i].modo),BorderLayout.NORTH);
@@ -163,12 +161,10 @@ class BotonAñadirColumnas extends JButton{
                 catch (InvalidNameColException ince){
                     JOptionPane.showMessageDialog(null, "Ya existe una columna con ese nombre",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
-                    ince.printStackTrace();
                 }
                 catch (NameColVacioException ncve){
                     JOptionPane.showMessageDialog(null, "no puedes dejar el campo nombre en blanco",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
-                    ncve.printStackTrace();
                 }
                 
             }
@@ -226,7 +222,6 @@ class BotonAñadirTarjetas extends JButton{
                         catch (TitleCardVacioException tcve){
                             JOptionPane.showMessageDialog(null, "no puedes dejar el campo titulo en blanco",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
-                            tcve.printStackTrace();
                         }
             }
         });
@@ -250,7 +245,6 @@ class BotonEliminarTarjetas extends JButton{
                 catch (ListaVaciaException lve){
                      JOptionPane.showMessageDialog(null, "no hay tarjetas que eliminar",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
-                            lve.printStackTrace();
                 }
             }
         });

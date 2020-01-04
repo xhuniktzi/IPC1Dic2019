@@ -87,7 +87,7 @@ public class TarjetasLD implements ManageColumns{
         return datosAct;
     }
     
-    public Tarjeta eliminarAlFinal(){
+    public Tarjeta eliminarAlFinal() throws ListaVaciaException {
         if (estaVacia())
             throw new ListaVaciaException(nombre);
         

@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Exceptions.InvalidNameColException;
 import Exceptions.InvalidNickException;
 import Exceptions.InvalidTitleTabException;
 import Exceptions.ListaVaciaException;
@@ -13,7 +14,9 @@ import Logica.Containers.ColaboradoresLD;
 import Logica.Containers.ColaboradoresLS;
 import Logica.Containers.TablerosCS;
 import Logica.Elements.Colaborador;
+import Logica.Elements.Columna;
 import Logica.Elements.Tablero;
+import Logica.Elements.Tarjeta;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -106,6 +109,69 @@ public class Gestor {
             }
         }
         b.close();
+        
+    }
+    public void loadColumnasFromCSV(File file) throws FileNotFoundException, IOException{
+        String cadena;
+        FileReader f = new FileReader(file);
+        BufferedReader b = new BufferedReader(f);
+        cadena = b.readLine();
+        //Tablero, TituloLista, Tipo de columna, Titulo tarjeta, desc, colab, prioridad, nick, comment
+        while ((cadena = b.readLine())!= null){
+            String[] elements = cadena.split(",");
+            Tablero tab = getTablerosByTitle(elements[0]);
+            try{
+                if (elements[2].contains("Pila"))
+                    tab.addCols(new Columna(elements[1], Columna.Mode.PILA));
+                if (elements[2].contains("Cola"))
+                    tab.addCols(new Columna(elements[1], Columna.Mode.COLA));
+                if (elements[2].contains("Lista"))
+                    tab.addCols(new Columna(elements[1], Columna.Mode.DOBLE));
+
+                Columna col = tab.columnas.getColumnaByName(elements[1]);
+                try{
+                //verificar si no esta vacia
+                    if (elements[6].contains("alta")){
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.ALTA,elements[5]));
+                        //agregar comentario
+                    }
+                    if (elements[6].contains("media")){
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.MEDIA,elements[5]));
+                        //agregar comentario
+                    }
+                    if (elements[6].contains("baja")){
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.BAJA,elements[5]));
+                        //agregar comentario
+                    }
+                } catch (ArrayIndexOutOfBoundsException aioobe){
+                    //System.err.println("Crea columna -> no añade tarjeta" + col.nombre);
+                    //aioobe.printStackTrace();
+                    
+                }
+            } catch (InvalidNameColException ince){
+                
+                Columna col = tab.columnas.getColumnaByName(elements[1]);
+                try{
+                //verificar si no esta vacia
+                    if (elements[6].contains("alta")){
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.ALTA,elements[5]));
+                        //agregar comentario
+                    }
+                    if (elements[6].contains("media")){
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.MEDIA,elements[5]));
+                        //agregar comentario
+                    }
+                    if (elements[6].contains("baja")){
+                        col.addTarjeta(new Tarjeta(elements[3],elements[4],Tarjeta.Priority.BAJA,elements[5]));
+                        //agregar comentario
+                    }
+                } catch (ArrayIndexOutOfBoundsException aioobe){
+                    //System.err.println("No Crea columna -> no añade tarjeta");
+                }
+                
+            }
+                
+        }
         
     }
 }

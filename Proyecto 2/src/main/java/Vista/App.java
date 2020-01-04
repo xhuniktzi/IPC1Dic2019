@@ -109,6 +109,11 @@ public class App extends javax.swing.JFrame {
         });
 
         jButton8.setText("Cargar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -391,21 +396,18 @@ public class App extends javax.swing.JFrame {
                     "Ya existe el nickname",
                     "Validacion",
                     JOptionPane.WARNING_MESSAGE);
-            ine.printStackTrace();
         }
         catch (NickVacioException nve){
             JOptionPane.showMessageDialog(this,
                     "No puedes dejar vacio el nickname",
                     "Validacion",
                     JOptionPane.WARNING_MESSAGE);
-            nve.printStackTrace();
         }
         catch (NumberFormatException nfe){
             JOptionPane.showMessageDialog(this,
                     "Telefono unicamente admite numeros",
                     "Validacion",
                     JOptionPane.WARNING_MESSAGE);
-            nfe.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -426,14 +428,12 @@ public class App extends javax.swing.JFrame {
                     "Ya existe un tablero con ese titulo",
                     "Validacion",
                     JOptionPane.WARNING_MESSAGE);
-            itte.printStackTrace();
         }
         catch (TitleVacioException tve){
             JOptionPane.showMessageDialog(this,
                     "No puedes dejar el campo de titulo vacio",
                     "Validacion",
                     JOptionPane.WARNING_MESSAGE);
-            tve.printStackTrace();
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -472,6 +472,18 @@ public class App extends javax.swing.JFrame {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser selectFiles = new JFileChooser();
+        selectFiles.showOpenDialog(this);
+        File file = selectFiles.getSelectedFile();
+        try {
+            App.gestor.loadColumnasFromCSV(file);
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -49,7 +49,6 @@ public class ListarTabs extends JFrame {
             }
         }
         catch (ListaVaciaException lve){
-            lve.printStackTrace();
         }
         
         /*
