@@ -7,7 +7,6 @@ package Vista;
 
 
 import Exceptions.InvalidNameColException;
-import Exceptions.InvalidTitleCardException;
 import Exceptions.ListaVaciaException;
 import Exceptions.NameColVacioException;
 import Exceptions.TitleCardVacioException;
@@ -222,10 +221,6 @@ class BotonAñadirTarjetas extends JButton{
                         }
                         catch (TitleCardVacioException tcve){
                             JOptionPane.showMessageDialog(null, "no puedes dejar el campo titulo en blanco",
-                            "Validacion", JOptionPane.WARNING_MESSAGE);
-                        }
-                        catch(InvalidTitleCardException itce){
-                            JOptionPane.showMessageDialog(null, "ya existe una tarjeta con ese nombre",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
                         }
             }

@@ -5,9 +5,7 @@
  */
 package Logica.Containers;
 
-import Exceptions.InvalidTitleCardException;
 import Exceptions.ListaVaciaException;
-import Exceptions.TarjetaNotFoundException;
 import Logica.Elements.Tarjeta;
 import Logica.ManageColumns;
 
@@ -26,24 +24,19 @@ public class TarjetasPila extends TarjetasLS implements ManageColumns {
         return super.eliminarAlFrente();
     }
     
-    public void push(Tarjeta dato) throws InvalidTitleCardException{super.insertarAlFrente(dato);}
+    public void push(Tarjeta dato){super.insertarAlFrente(dato);}
     
     @Override
     public void imprimir(){super.imprimir();}
     
     @Override
-    public void add(Tarjeta t) throws InvalidTitleCardException {
+    public void add(Tarjeta t) {
         push(t);
     }
 
     @Override
     public Tarjeta[] getArrayDataTarjetas() throws ListaVaciaException {
         return super.getArrayTarjeta();
-    }
-
-    @Override
-    public Tarjeta getTarjetaByTitle(String title) throws ListaVaciaException, TarjetaNotFoundException {
-        return super.getTarjetaByTitle(title);
     }
 
     
