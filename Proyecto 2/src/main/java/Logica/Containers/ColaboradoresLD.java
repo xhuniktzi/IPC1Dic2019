@@ -5,6 +5,7 @@
  */
 package Logica.Containers;
 
+import Exceptions.ColaboradorNotFoundException;
 import Exceptions.InvalidNickException;
 import Exceptions.ListaVaciaException;
 import Exceptions.NickVacioException;
@@ -126,6 +127,35 @@ public class ColaboradoresLD {
             end.sig = null;
         }
         return datosAct;
+    }
+    
+    public Colaborador eliminarColaboradorByNickname (String nick) throws ListaVaciaException, ColaboradorNotFoundException {
+        if (estaVacia())
+            throw new ListaVaciaException(nombre);
+        
+        NodoColaboradorLD act = ini;
+        while (act != null){
+            if (act.dato.nickname.equals(nick)){
+                //delete;
+                NodoColaboradorLD prev = act.ant;
+                NodoColaboradorLD next = act.sig;
+                if (act.ant == null){
+                    contador--;
+                    return eliminarAlFrente();
+                }
+                if (act.sig == null){
+                    contador--;
+                    return eliminarAlFinal();
+                }
+                Colaborador data = act.dato;
+                prev.sig = next;
+                next.ant = prev;
+                contador--;
+                return data;
+            }
+            act = act.sig;
+        }
+        throw new ColaboradorNotFoundException();
     }
     
     public Colaborador[] getArrayColaborador(){
