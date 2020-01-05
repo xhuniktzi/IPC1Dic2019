@@ -133,6 +133,20 @@ public class ColaboradoresLD {
         return datosAct;
     }
     
+    public Colaborador getColaboradorByNickname(String nickname){
+        if (estaVacia())
+            throw new ListaVaciaException(nombre);
+        
+        NodoColaboradorLD act = ini;
+        while (act != null){
+            if (act.dato.nickname.equals(nickname)){
+                return act.dato;
+            }
+            act = act.sig;
+        }
+        throw new ColaboradorNotFoundException();
+    }
+    
     public Colaborador eliminarColaboradorByNickname (String nick) throws ListaVaciaException, ColaboradorNotFoundException {
         if (estaVacia())
             throw new ListaVaciaException(nombre);

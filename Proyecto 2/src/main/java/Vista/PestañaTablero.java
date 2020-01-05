@@ -20,11 +20,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -48,6 +54,7 @@ public class PestañaTablero extends JPanel{
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelBotones.add(new BotonAñadirColumnas(tab));
         panelBotones.add(new BotonEliminarTablero(tab));
+        panelBotones.add(new BotonGraphviz(App.toSave.getAbsolutePath(), tab));
         
         JPanel content = new JPanel();
         try{
@@ -236,8 +243,8 @@ class BotonEliminarTarjetas extends JButton{
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int resp = JOptionPane.showConfirmDialog(null, "Vas a eliminar una tarjeta, ¿Estas seguro?",
-                        "Confirmacion",JOptionPane.YES_NO_OPTION);
+                    int resp = JOptionPane.showConfirmDialog(null, "Vas a eliminar una tarjeta, ¿Estas seguro?",
+                            "Confirmacion",JOptionPane.YES_NO_OPTION);
                 try {
                     if (resp == 0)
                         c.deleteTarjeta();
@@ -319,6 +326,45 @@ class BotonAñadirComentario extends JButton {
                 t.addComentario(new Comentario(comment,opcion));
             }
         });
+    }
+    
+}
+class BotonGraphviz extends JButton {
+
+    public BotonGraphviz(String ruta, Tablero tab) {
+        setText("Mostrar graphviz");
+        addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //abrir ventana de los diagramas
+                Tablero t = App.gestor.tablerosCreados.getTableroByTitle(tab.nombre);
+                try {
+                    t.columnas.drawGraphviz(ruta);
+                } catch (IOException ex) {
+                    Logger.getLogger(BotonGraphviz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ViewGraphviz v = new ViewGraphviz(ruta, tab);
+            }
+            
+        });
+    }
+}
+
+class ViewGraphviz extends JFrame{
+
+    public ViewGraphviz(String ruta, Tablero tab) throws HeadlessException {
+        super("Visualizar diagramas");
+        String nameFile = tab.nombre.replace(" ", "");
+        setVisible(true);
+        setSize(560,560);
+        
+        Container content = getContentPane();
+        content.setLayout(new FlowLayout(FlowLayout.CENTER));
+        /*
+        JPanel imageColabs = new JPanel();
+        imageColabs.add(new JLabel(new ImageIcon(ruta + "/img/colaboradores.jpg")));
+        */
+        content.add(new JScrollPane(new JLabel(new ImageIcon(ruta + "/img/columna_" + nameFile + ".jpg"))));
     }
     
 }

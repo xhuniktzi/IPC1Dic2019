@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Logica.Elements.Colaborador;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -14,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -42,6 +44,7 @@ public class EliminarColaboradores extends JDialog{
         
         String[][] dataColabs = App.gestor.getArrayDataColaboradores();
         
+        
         for (int i = 0; i < dataColabs[0].length;i++){
             JPanel actColab = new JPanel();
             actColab.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -52,6 +55,7 @@ public class EliminarColaboradores extends JDialog{
             actColab.add(new JLabel("Rol:  "+ dataColabs[2][i]));
             actColab.add(new JLabel("Telefono:  "+ dataColabs[3][i]));
             actColab.add(new BotonEliminarColaborador(dataColabs[1][i]));
+            actColab.add(new BotonModificarColaborador(dataColabs[1][i]));
             panelContent.add(actColab);
         }
         content.add(panelContent,BorderLayout.CENTER);
@@ -68,7 +72,41 @@ class BotonEliminarColaborador extends JButton{
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                App.gestor.colaboradoresRegistrados.eliminarColaboradorByNickname(nickname);
+                int resp = JOptionPane.showConfirmDialog(null, "Vas a eliminar un colaborador, ¿Estas seguro?",
+                        "Confirmacion",JOptionPane.YES_NO_OPTION);
+                if (resp == 0)
+                    App.gestor.colaboradoresRegistrados.eliminarColaboradorByNickname(nickname);
+            }
+        });
+    }
+    
+}
+class BotonModificarColaborador extends JButton {
+
+    public BotonModificarColaborador(String nickname) {
+        setText("Modificar Colaborador");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Colaborador act = App.gestor.colaboradoresRegistrados.getColaboradorByNickname(nickname);
+                
+                String nombre = JOptionPane.showInputDialog("Nombre: ", act.nombre);
+                String nickname = JOptionPane.showInputDialog("Nickname: ", act.nickname);
+                String rol = JOptionPane.showInputDialog("Rol: ", act.rol);
+                String tel = JOptionPane.showInputDialog("Telefono: ", act.telfono);
+                
+                
+                if (!App.gestor.colaboradoresRegistrados.checkExistsNickname(nickname))
+                    act.nickname = nickname;
+                else {
+                    JOptionPane.showMessageDialog(null, "ese nickname ya existe",
+                            "Validacion", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                act.nombre = nombre;
+                act.rol = rol;
+                act.telfono = Integer.parseInt(tel);
+                
             }
         });
     }

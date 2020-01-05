@@ -127,11 +127,13 @@ public class ColumnasCD {
     public boolean estaVacia(){
         return (ini == null && end ==null);
     }
-    /*
-    public void drawGraphviz() throws IOException{
-        imprimir();
-        String path = "graph/"+ this.nombre +"_"+ superior.nombre +".dot";
-        String pathImg = "graph/"+ this.nombre +"_"+ superior.nombre +".jpg";
+    
+    public void drawGraphviz(String ruta) throws IOException{
+        //imprimir();
+        String nameFile = superior.nombre.replace(" ", "");
+        
+        String path = ruta + "/dot/columna_" + nameFile + ".dot";
+        String pathImg = ruta + "/img/columna_" + nameFile + ".jpg";
         File drawFile = new File(path);
         if (drawFile.exists()){
             drawFile.delete();
@@ -160,20 +162,16 @@ public class ColumnasCD {
         
         txt.println("}");
         
+        txt.close();
+        txt2.close();
         
-        
-        
-        String command = "dot -Tjpg " + path + " -O " + pathImg;
+        String command = "dot -Tjpg " + path + " -o " + pathImg;
         
         Runtime run = Runtime.getRuntime();
         run.exec(command);
         
-        txt.close();
-        txt2.close();
-        
-        
     }
-    */
+    
     public void imprimir(){
         if (estaVacia()){
             System.out.println("La lista. "+ nombre+ " esta vacia");

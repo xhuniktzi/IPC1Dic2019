@@ -5,9 +5,7 @@
  */
 package Logica.Elements;
 
-import Exceptions.ColumnaNotFoundException;
 import Exceptions.InvalidNameColException;
-import Exceptions.ListaVaciaException;
 import Logica.Containers.ColumnasCD;
 
 /**
