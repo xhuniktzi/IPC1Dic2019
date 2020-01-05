@@ -63,9 +63,6 @@ public class ColumnasCD {
             ini.ant = end;
         }
         contador++;
-        
-        
-        
     }
     
     public Columna[] getArrayColumnas() throws ListaVaciaException {

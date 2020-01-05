@@ -148,10 +148,10 @@ public class TablerosCS {
         throw new TabNotFoundException();
     }
     
-    /*
-    public void drawGraphviz() throws IOException{
-        String path = "graph/tableros.dot";
-        String pathImg = "graph/Tableros.jpg";
+    
+    public void drawGraphviz(String ruta) throws IOException{
+        String path = ruta + "/dot/tableros.dot";
+        String pathImg = ruta + "/img/tableros.jpg";
         File drawFile = new File(path);
         if (drawFile.exists()){
             drawFile.delete();
@@ -179,20 +179,15 @@ public class TablerosCS {
         
         txt.println("}");
         
-        
-        
-        
-        String command = "dot -Tjpg " + path + " -O " + pathImg;
-        
-        Runtime run = Runtime.getRuntime();
-        run.exec(command);
-        
         txt.close();
         txt2.close();
         
+        String command = "dot -Tjpg " + path + " -o " + pathImg;
         
+        Runtime run = Runtime.getRuntime();
+        run.exec(command);
     }
-    */
+    
     
     public void imprimir(){
         

@@ -170,10 +170,11 @@ public class Gestor {
                 } catch (ArrayIndexOutOfBoundsException aioobe){
                     //System.err.println("No Crea columna -> no añade tarjeta");
                 }
-                
-            }
-                
+            }       
         }
-        
+    }
+    public void drawGraphviz(String ruta) throws IOException{
+        colaboradoresRegistrados.drawGraphviz(ruta);
+        tablerosCreados.drawGraphviz(ruta);
     }
 }

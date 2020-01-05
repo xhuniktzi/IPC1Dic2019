@@ -11,6 +11,10 @@ import Exceptions.ListaVaciaException;
 import Exceptions.NickVacioException;
 import Logica.Elements.Colaborador;
 import Logica.EspecNodos.NodoColaboradorLD;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -168,6 +172,53 @@ public class ColaboradoresLD {
             i++;
         }
         return retorno;
+    }
+    
+    public void drawGraphviz(String ruta) throws IOException{
+        String path = ruta + "/dot/colaboradores.dot";
+        String pathImg = ruta+ "/img/colaboradores.jpg";
+        File drawFile = new File(path);
+        if (drawFile.exists()){
+            drawFile.delete();
+            drawFile.createNewFile();
+        }
+        else {
+            drawFile.createNewFile();
+        }
+        
+        FileWriter txt2 = new FileWriter(drawFile,true);
+        PrintWriter txt = new PrintWriter(txt2);
+        
+        txt.println("digraph A{");
+        if (estaVacia())
+            txt.println("ini->null");
+        else {
+            txt.println("ini->" + ini.hashCode());
+            NodoColaboradorLD act =ini;
+            while (act != null){
+                if (act.sig != null)
+                    txt.println(act.hashCode() + "->" + act.sig.hashCode());
+                else
+                    txt.println(act.hashCode() + "-> null");
+                
+                if (act.ant != null)
+                    txt.println(act.hashCode() + "->" + act.ant.hashCode());
+                else
+                    txt.println(act.hashCode() + "-> Null");
+                
+            act = act.sig;
+            }
+        }
+        
+        txt.println("}");
+        
+        txt.close();
+        txt2.close();
+        
+        String command = "dot -Tjpg " + path + " -o " + pathImg;
+        
+        Runtime run = Runtime.getRuntime();
+        run.exec(command);
     }
     
     public boolean estaVacia(){
