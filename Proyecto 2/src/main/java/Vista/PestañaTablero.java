@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -84,7 +85,10 @@ public class PestañaTablero extends JPanel{
             botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
             botonesColumnas.add(new BotonAñadirTarjetas(cols[i]));
             botonesColumnas.add(new BotonEliminarTarjetas(cols[i]));
-            botonesColumnas.add(new BotonModificarColumnas(cols[i], tab));
+            
+            JPanel botonesColumnas2 = new JPanel();
+            botonesColumnas2.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            botonesColumnas2.add(new BotonModificarColumnas(cols[i], tab));
             
             JPanel tarjetas = new JPanel();
             tarjetas.setLayout(new BoxLayout(tarjetas, BoxLayout.Y_AXIS));
@@ -121,7 +125,13 @@ public class PestañaTablero extends JPanel{
                 
             columna.add(new JLabel(cols[i].nombre+" - "+cols[i].modo),BorderLayout.NORTH);
             columna.add(tarjetas,BorderLayout.CENTER);
-            columna.add(botonesColumnas,BorderLayout.SOUTH);
+            
+            JPanel generalButtons = new JPanel();
+            generalButtons.setLayout(new BoxLayout(generalButtons, BoxLayout.Y_AXIS));
+            generalButtons.add(botonesColumnas);
+            generalButtons.add(botonesColumnas2);
+            
+            columna.add(generalButtons,BorderLayout.SOUTH);
             content.add(columna);
         }
         add(new JScrollPane(content),BorderLayout.CENTER);
@@ -213,7 +223,7 @@ class BotonAñadirColumnas extends JButton{
 class BotonAñadirTarjetas extends JButton{
 
     public BotonAñadirTarjetas(Columna c) {
-        setText("Añadir");
+        setText("Añadir Tarjeta");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -271,7 +281,7 @@ class BotonAñadirTarjetas extends JButton{
 class BotonEliminarTarjetas extends JButton{
 
     public BotonEliminarTarjetas(Columna c) {
-        setText("Eliminar");
+        setText("Eliminar Tarjeta");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -294,7 +304,7 @@ class BotonEliminarTarjetas extends JButton{
 class BotonModificarColumnas extends JButton{
 
     public BotonModificarColumnas(Columna col,Tablero tab) {
-        setText("Modificar");
+        setText("Modificar Columna");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
