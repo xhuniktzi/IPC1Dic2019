@@ -70,71 +70,77 @@ public class PestañaTablero extends JPanel{
         }
         content.setLayout(null);
         Tablero tablero = App.gestor.getTablerosByTitle(tab.nombre);
-        Columna[] cols = tablero.columnas.getArrayColumnas();
-        
-        for (int i = 0; i<cols.length;i++){
-            JPanel columna = new JPanel();
-            Border border = new TitledBorder(new EtchedBorder());
-            columna.setBorder(border);
-            
-            columna.setLayout(new BorderLayout());
-            columna.setSize(280,480);
-            columna.setLocation(i*280, 0);
-            
-            JPanel botonesColumnas = new JPanel();
-            botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            botonesColumnas.add(new BotonAñadirTarjetas(cols[i]));
-            botonesColumnas.add(new BotonEliminarTarjetas(cols[i]));
-            
-            JPanel botonesColumnas2 = new JPanel();
-            botonesColumnas2.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            botonesColumnas2.add(new BotonModificarColumnas(cols[i], tab));
-            
-            JPanel tarjetas = new JPanel();
-            tarjetas.setLayout(new BoxLayout(tarjetas, BoxLayout.Y_AXIS));
-            
-            try{
-                Tarjeta[] cards = cols[i].tarjetas.getArrayDataTarjetas();
+        try{
+            Columna[] cols = tablero.columnas.getArrayColumnas();
 
-                for (int j = 0; j< cards.length;j++){
-                    JPanel actTarjeta = new JPanel();
-                    actTarjeta.setLayout(new BoxLayout(actTarjeta, BoxLayout.Y_AXIS));
-                    actTarjeta.setBorder(border);
+            for (int i = 0; i<cols.length;i++){
+                JPanel columna = new JPanel();
+                Border border = new TitledBorder(new EtchedBorder());
+                columna.setBorder(border);
 
-                    actTarjeta.add(new JLabel(cards[j].title));
-                    actTarjeta.add(new JLabel(cards[j].desc));
-                    actTarjeta.add(new JLabel(cards[j].prioridad.toString()));
-                    if (cards[j].nickColaborador.equals(""))
-                        actTarjeta.add(new JLabel("No hay colaborador vinculado"));
-                    else
-                        actTarjeta.add(new JLabel(cards[j].nickColaborador));
-                    
-                    JPanel botonesTarjeta = new JPanel();
-                    botonesTarjeta.setLayout(new FlowLayout(FlowLayout.RIGHT));
-                    botonesTarjeta.add(new BotonComentarios(cards[j]));
-                    botonesTarjeta.add(new BotonModificarTarjetas(cards[j]));
-                    
-                    actTarjeta.add(botonesTarjeta);
-                    
-                    tarjetas.add(actTarjeta);
-                    
+                columna.setLayout(new BorderLayout());
+                columna.setSize(300,480);
+                columna.setLocation(i*300, 0);
+
+                JPanel botonesColumnas = new JPanel();
+                botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                botonesColumnas.add(new BotonAñadirTarjetas(cols[i]));
+                botonesColumnas.add(new BotonEliminarTarjetas(cols[i]));
+
+                JPanel botonesColumnas2 = new JPanel();
+                botonesColumnas2.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                botonesColumnas2.add(new BotonModificarColumnas(cols[i], tab));
+                botonesColumnas2.add(new BotonEliminarColumnas(cols[i], tab));
+
+                JPanel tarjetas = new JPanel();
+                tarjetas.setLayout(new BoxLayout(tarjetas, BoxLayout.Y_AXIS));
+
+                try{
+                    Tarjeta[] cards = cols[i].tarjetas.getArrayDataTarjetas();
+
+                    for (int j = 0; j< cards.length;j++){
+                        JPanel actTarjeta = new JPanel();
+                        actTarjeta.setLayout(new BoxLayout(actTarjeta, BoxLayout.Y_AXIS));
+                        actTarjeta.setBorder(border);
+
+                        actTarjeta.add(new JLabel(cards[j].title));
+                        actTarjeta.add(new JLabel(cards[j].desc));
+                        actTarjeta.add(new JLabel(cards[j].prioridad.toString()));
+                        if (cards[j].nickColaborador.equals(""))
+                            actTarjeta.add(new JLabel("No hay colaborador vinculado"));
+                        else
+                            actTarjeta.add(new JLabel(cards[j].nickColaborador));
+
+                        JPanel botonesTarjeta = new JPanel();
+                        botonesTarjeta.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        botonesTarjeta.add(new BotonComentarios(cards[j]));
+                        botonesTarjeta.add(new BotonModificarTarjetas(cards[j]));
+
+                        actTarjeta.add(botonesTarjeta);
+
+                        tarjetas.add(actTarjeta);
+
+                    }
                 }
+                catch (ListaVaciaException lve){
+                }
+
+                columna.add(new JLabel(cols[i].nombre+" - "+cols[i].modo),BorderLayout.NORTH);
+                columna.add(tarjetas,BorderLayout.CENTER);
+
+                JPanel generalButtons = new JPanel();
+                generalButtons.setLayout(new BoxLayout(generalButtons, BoxLayout.Y_AXIS));
+                generalButtons.add(botonesColumnas);
+                generalButtons.add(botonesColumnas2);
+
+                columna.add(generalButtons,BorderLayout.SOUTH);
+                content.add(columna);
+                add(new JScrollPane(content),BorderLayout.CENTER);
             }
-            catch (ListaVaciaException lve){
-            }
-                
-            columna.add(new JLabel(cols[i].nombre+" - "+cols[i].modo),BorderLayout.NORTH);
-            columna.add(tarjetas,BorderLayout.CENTER);
-            
-            JPanel generalButtons = new JPanel();
-            generalButtons.setLayout(new BoxLayout(generalButtons, BoxLayout.Y_AXIS));
-            generalButtons.add(botonesColumnas);
-            generalButtons.add(botonesColumnas2);
-            
-            columna.add(generalButtons,BorderLayout.SOUTH);
-            content.add(columna);
+        } catch (ListaVaciaException lve){
+            lve.printStackTrace();
         }
-        add(new JScrollPane(content),BorderLayout.CENTER);
+        
         add(panelBotones,BorderLayout.SOUTH);
     }
     
@@ -316,6 +322,19 @@ class BotonModificarColumnas extends JButton{
                     JOptionPane.showMessageDialog(null, "ya existe una columna con ese titulo en este tablero",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
                 }
+            }
+        });
+    }
+}
+
+class BotonEliminarColumnas extends JButton {
+
+    public BotonEliminarColumnas(Columna col,Tablero tab) {
+        setText("Eliminar Columna");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tab.deleteCols(col);
             }
         });
     }

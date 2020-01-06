@@ -37,6 +37,9 @@ public class Tablero {
         columnas.insertar(c);
         //contadorCols++;
     }
+    public Columna deleteCols(Columna c){
+        return columnas.eliminarColumnaByName(c.nombre);
+    }
 
     /*
     public static enum Visibility {

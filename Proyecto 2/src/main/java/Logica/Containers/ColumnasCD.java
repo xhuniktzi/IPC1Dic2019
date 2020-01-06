@@ -107,7 +107,6 @@ public class ColumnasCD {
         return dato;
         
     }
-   
     
     //get columna by title
     public Columna getColumnaByName(String name) throws ListaVaciaException,ColumnaNotFoundException {
@@ -123,6 +122,42 @@ public class ColumnasCD {
         throw new ColumnaNotFoundException();
     }
     
+    public Columna eliminarColumnaByName(String name){
+        if (estaVacia())
+            throw new ListaVaciaException(nombre);
+        
+        NodoColumnaCD act = ini;
+        do {
+            if (act.dato.nombre.equals(name)){
+                Columna data = act.dato;
+                if (act == ini && act == end){
+                    ini = null;
+                    end = null;
+                } else if (act == ini){
+                    NodoColumnaCD prev = act.ant;
+                    NodoColumnaCD next = act.sig;
+                    prev.sig = next;
+                    next.ant = prev;
+                    ini = next;
+                } else if (act == end){
+                    NodoColumnaCD prev = act.ant;
+                    NodoColumnaCD next = act.sig;
+                    prev.sig = next;
+                    next.ant = prev;
+                    end = prev;
+                } else {
+                    NodoColumnaCD prev = act.ant;
+                    NodoColumnaCD next = act.sig;
+                    prev.sig = next;
+                    next.ant = prev;
+                }
+                contador--;
+                return data;
+            }
+            act = act.sig;
+        }  while (act!= ini);
+        throw new ColumnaNotFoundException();
+    }
     
     public boolean estaVacia(){
         return (ini == null && end ==null);
@@ -147,10 +182,13 @@ public class ColumnasCD {
         PrintWriter txt = new PrintWriter(txt2);
         
         txt.println("digraph A{");
-        if (estaVacia())
+        if (estaVacia()){
             txt.println("ini->null");
+            txt.println("end->null");
+        }
         else {
             txt.println("ini->"+ini.hashCode());
+            txt.println("end->"+end.hashCode());
             NodoColumnaCD act = ini;
             do {
                 txt.println(act.hashCode() + "->" + act.sig.hashCode());
