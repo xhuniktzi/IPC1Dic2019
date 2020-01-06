@@ -54,8 +54,13 @@ public class PestañaTablero extends JPanel{
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelBotones.add(new BotonAñadirColumnas(tab));
         panelBotones.add(new BotonEliminarTablero(tab));
+        panelBotones.add(new BotonModificarTablero(tab));
+        try{
         panelBotones.add(new BotonGraphviz(App.toSave.getAbsolutePath(), tab));
-        
+        }
+        catch (NullPointerException npe){
+            //npe.printStackTrace();
+        }
         JPanel content = new JPanel();
         try{
             content.setBackground(Color.decode(tab.hexColor));
@@ -72,13 +77,14 @@ public class PestañaTablero extends JPanel{
             columna.setBorder(border);
             
             columna.setLayout(new BorderLayout());
-            columna.setSize(240,480);
-            columna.setLocation(i*240, 0);
+            columna.setSize(360,480);
+            columna.setLocation(i*360, 0);
             
             JPanel botonesColumnas = new JPanel();
             botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
             botonesColumnas.add(new BotonAñadirTarjetas(cols[i]));
             botonesColumnas.add(new BotonEliminarTarjetas(cols[i]));
+            botonesColumnas.add(new BotonModificarColumnas(cols[i], tab));
             
             JPanel tarjetas = new JPanel();
             tarjetas.setLayout(new BoxLayout(tarjetas, BoxLayout.Y_AXIS));
@@ -102,6 +108,7 @@ public class PestañaTablero extends JPanel{
                     JPanel botonesTarjeta = new JPanel();
                     botonesTarjeta.setLayout(new FlowLayout(FlowLayout.RIGHT));
                     botonesTarjeta.add(new BotonComentarios(cards[j]));
+                    botonesTarjeta.add(new BotonModificarTarjetas(cards[j]));
                     
                     actTarjeta.add(botonesTarjeta);
                     
@@ -137,6 +144,31 @@ class BotonEliminarTablero extends JButton{
             }
         });
         
+    }
+    
+}
+
+class BotonModificarTablero extends JButton{
+
+    public BotonModificarTablero(Tablero t) {
+        setText("Modificar Tablero");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tablero act = t;
+                String nombre = JOptionPane.showInputDialog("Titulo del tablero: ", act.nombre);
+                String color = JOptionPane.showInputDialog("Color: ", act.hexColor);
+                if(!App.gestor.tablerosCreados.checkExistsTableroTitle(nombre))
+                    t.nombre = nombre;
+                else{
+                    JOptionPane.showMessageDialog(null, "ya existe un tablero con ese titulo",
+                            "Validacion", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                t.hexColor = color;
+                    
+            }
+        });
     }
     
 }
@@ -181,7 +213,7 @@ class BotonAñadirColumnas extends JButton{
 class BotonAñadirTarjetas extends JButton{
 
     public BotonAñadirTarjetas(Columna c) {
-        setText("Añadir Tarjeta");
+        setText("AddTarjeta");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -207,7 +239,7 @@ class BotonAñadirTarjetas extends JButton{
                         
                 String[] opt = {"Alta","Media","Baja"};
                 
-                 String opcion =(String) JOptionPane.showInputDialog(null,
+                String opcion =(String) JOptionPane.showInputDialog(null,
                         "Selccione prioridad de la tarjeta",
                         "Crear Tarjeta",
                         JOptionPane.QUESTION_MESSAGE,null,opt,opt[0]);
@@ -239,7 +271,7 @@ class BotonAñadirTarjetas extends JButton{
 class BotonEliminarTarjetas extends JButton{
 
     public BotonEliminarTarjetas(Columna c) {
-        setText("Eliminar Tarjeta");
+        setText("DeleteTarjeta");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -253,6 +285,86 @@ class BotonEliminarTarjetas extends JButton{
                      JOptionPane.showMessageDialog(null, "no hay tarjetas que eliminar",
                             "Validacion", JOptionPane.WARNING_MESSAGE);
                 }
+            }
+        });
+    }
+    
+}
+
+class BotonModificarColumnas extends JButton{
+
+    public BotonModificarColumnas(Columna col,Tablero tab) {
+        setText("Modificar");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Columna act = col;
+                String nombre = JOptionPane.showInputDialog("Titulo de la columna: ", act.nombre);
+                if (!tab.columnas.checkExistsNombre(nombre))
+                    act.nombre = nombre;
+                else {
+                    JOptionPane.showMessageDialog(null, "ya existe una columna con ese titulo en este tablero",
+                            "Validacion", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+    }
+    
+}
+
+class BotonModificarTarjetas extends JButton {
+
+    public BotonModificarTarjetas(Tarjeta t) {
+        setText("Modificar");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tarjeta act = t;
+                String nombre = JOptionPane.showInputDialog("Titulo de la tarjeta: ", act.title);
+                String desc = JOptionPane.showInputDialog("Titulo de la tarjeta: ", act.desc);
+                
+                String[] opt = {"Alta","Media","Baja"};
+                String opcion = null;
+                if (act.prioridad == Tarjeta.Priority.ALTA)
+                    opcion = (String) JOptionPane.showInputDialog(null,
+                        "Selccione prioridad de la tarjeta",
+                        "Crear Tarjeta",
+                        JOptionPane.QUESTION_MESSAGE,null,opt,opt[0]);
+                if (act.prioridad == Tarjeta.Priority.MEDIA)
+                    opcion = (String) JOptionPane.showInputDialog(null,
+                        "Selccione prioridad de la tarjeta",
+                        "Crear Tarjeta",
+                        JOptionPane.QUESTION_MESSAGE,null,opt,opt[1]);
+                if (act.prioridad == Tarjeta.Priority.BAJA)
+                    opcion = (String) JOptionPane.showInputDialog(null,
+                        "Selccione prioridad de la tarjeta",
+                        "Crear Tarjeta",
+                        JOptionPane.QUESTION_MESSAGE,null,opt,opt[2]);
+                
+                act.title = nombre;
+                act.desc = desc;
+                
+                if(opcion.equals("Alta"))
+                    act.prioridad = Tarjeta.Priority.ALTA;
+                if(opcion.equals("Media"))
+                    act.prioridad = Tarjeta.Priority.MEDIA;
+                if(opcion.equals("Baja"))
+                    act.prioridad = Tarjeta.Priority.BAJA;
+                
+                
+                Colaborador[] colabs = App.gestor.colaboradoresRegistrados.getArrayColaborador();
+                String[] optColabs = new String[colabs.length+1];
+                
+                optColabs[0] = "";
+                
+                for (int i = 0; i < colabs.length;i++){
+                    optColabs[i+1] = colabs[i].nickname;
+                }
+                
+                act.nickColaborador = (String) JOptionPane.showInputDialog(null,
+                        "Selccione el colaborador vinculado a la tarjeta",
+                        "Escribir comentario",
+                        JOptionPane.QUESTION_MESSAGE,null,optColabs,optColabs[0]);
             }
         });
     }
@@ -299,6 +411,7 @@ class DialogComentarios extends JDialog {
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
         panelBotones.add(new BotonAñadirComentario(t));
+        panelBotones.add(new BotonEliminarComentario(t));
         
         content.add(new JScrollPane(table),BorderLayout.CENTER);
         content.add(panelBotones,BorderLayout.SOUTH);
@@ -329,6 +442,24 @@ class BotonAñadirComentario extends JButton {
     }
     
 }
+
+class BotonEliminarComentario extends JButton {
+
+    public BotonEliminarComentario(Tarjeta t) {
+        setText("Eliminar Comentario");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int resp = JOptionPane.showConfirmDialog(null, "Vas a eliminar un comentario, ¿Estas seguro?",
+                            "Confirmacion",JOptionPane.YES_NO_OPTION);
+                if( resp == 0)
+                    t.deleteComentario();
+            }
+        });
+    }
+    
+}
+
 class BotonGraphviz extends JButton {
 
     public BotonGraphviz(String ruta, Tablero tab) {

@@ -40,6 +40,10 @@ public class Tarjeta {
         comentarios.enqueue(dato);
     }
     
+    public Comentario deleteComentario(){
+        return comentarios.dequeue();
+    }
+    
     public String[][] getArrayDataComments() {
         
         Comentario[] comments = comentarios.getComments();
