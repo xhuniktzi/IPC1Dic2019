@@ -210,15 +210,25 @@ public class ColaboradoresLD {
             txt.println("ini->" + ini.hashCode());
             NodoColaboradorLD act =ini;
             while (act != null){
-                if (act.sig != null)
-                    txt.println(act.hashCode() + "->" + act.sig.hashCode());
-                else
+                if (act.sig != null){
+                    txt.println(act.hashCode() + "->" + act.sig.hashCode() + "");
+                    txt.println(act.hashCode() + " [label=\"" + act.dato.nickname + "\"];");
+                    txt.println(act.sig.hashCode() + " [label=\"" + act.sig.dato.nickname + "\"];");
+                }
+                else{
                     txt.println(act.hashCode() + "-> null");
+                    txt.println(act.hashCode() + " [label=\"" + act.dato.nickname + "\"];");
+                }
                 
-                if (act.ant != null)
+                if (act.ant != null){
                     txt.println(act.hashCode() + "->" + act.ant.hashCode());
-                else
+                    txt.println(act.hashCode() + " [label=\"" + act.dato.nickname + "\"];");
+                    txt.println(act.ant.hashCode() + " [label=\"" + act.ant.dato.nickname + "\"];");
+                }
+                else{
                     txt.println(act.hashCode() + "-> Null");
+                    txt.println(act.hashCode() + " [label=\"" + act.dato.nickname + "\"];");
+                }
                 
             act = act.sig;
             }

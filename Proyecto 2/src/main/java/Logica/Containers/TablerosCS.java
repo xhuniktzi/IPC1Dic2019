@@ -167,9 +167,12 @@ public class TablerosCS {
             txt.println("ini->null");
         else {
             txt.println("ini->" + end.hashCode());
+            txt.println(end.hashCode() + " [label=\"" + end.dato.nombre + "\"];");
             NodoTableroCS act = end.sig;
             do{
                 txt.println(act.hashCode() + "->" + act.sig.hashCode());
+                txt.println(act.hashCode() + " [label=\"" + act.dato.nombre + "\"];");
+                txt.println(act.sig.hashCode() + " [label=\"" + act.sig.dato.nombre + "\"];");
                 act = act.sig;
             }while (act != end.sig);
             

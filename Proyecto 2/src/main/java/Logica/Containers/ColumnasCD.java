@@ -155,6 +155,10 @@ public class ColumnasCD {
             do {
                 txt.println(act.hashCode() + "->" + act.sig.hashCode());
                 txt.println(act.hashCode() + "->" + act.ant.hashCode());
+                txt.println(act.hashCode() + " [label=\"" + act.dato.nombre + "\"];");
+                txt.println(act.sig.hashCode() + " [label=\"" + act.sig.dato.nombre + "\"];");
+                txt.println(act.ant.hashCode() + " [label=\"" + act.ant.dato.nombre + "\"];");
+                
                 act = act.sig;
             } while (act!= ini);
             
