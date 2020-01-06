@@ -128,10 +128,16 @@ public class PestañaTablero extends JPanel{
                 columna.add(new JLabel(cols[i].nombre+" - "+cols[i].modo),BorderLayout.NORTH);
                 columna.add(tarjetas,BorderLayout.CENTER);
 
+                JPanel botonesMover = new JPanel();
+                botonesMover.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                botonesMover.add(new BotonMoveColumnBack(tab, cols[i]));
+                botonesMover.add(new BotonMoveColumnForward(tab, cols[i]));
+                
                 JPanel generalButtons = new JPanel();
                 generalButtons.setLayout(new BoxLayout(generalButtons, BoxLayout.Y_AXIS));
                 generalButtons.add(botonesColumnas);
                 generalButtons.add(botonesColumnas2);
+                generalButtons.add(botonesMover);
 
                 columna.add(generalButtons,BorderLayout.SOUTH);
                 content.add(columna);
@@ -487,6 +493,36 @@ class BotonEliminarComentario extends JButton {
                             "Confirmacion",JOptionPane.YES_NO_OPTION);
                 if( resp == 0)
                     t.deleteComentario();
+            }
+        });
+    }
+    
+}
+
+class BotonMoveColumnForward extends JButton {
+
+    public BotonMoveColumnForward(Tablero t, Columna c) {
+        setText(">>");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //
+                t.moveForward(c);
+            }
+        });
+    }
+    
+}
+
+class BotonMoveColumnBack extends JButton {
+
+    public BotonMoveColumnBack(Tablero t, Columna c) {
+        setText("<<");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //
+                t.moveBack(c);
             }
         });
     }

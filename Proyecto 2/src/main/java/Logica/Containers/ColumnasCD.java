@@ -108,6 +108,38 @@ public class ColumnasCD {
         
     }
     
+    public void moveToBackByName(String name) throws ColumnaNotFoundException,ListaVaciaException {
+        if (estaVacia())
+            throw new ListaVaciaException(nombre);
+        
+        NodoColumnaCD act = ini;
+        do {
+            if (act.dato.nombre.equals(name)){
+                Columna temp = act.ant.dato;
+                act.ant.dato = act.dato;
+                act.dato = temp;
+            }
+            act = act.sig;
+        }  while (act!= ini);
+        throw new ColumnaNotFoundException();
+    }
+    
+    public void moveToForwardByName(String name) throws ColumnaNotFoundException,ListaVaciaException {
+        if (estaVacia())
+            throw new ListaVaciaException(nombre);
+        
+        NodoColumnaCD act = ini;
+        do {
+            if (act.dato.nombre.equals(name)){
+                Columna temp = act.sig.dato;
+                act.sig.dato = act.dato;
+                act.dato = temp;
+            }
+            act = act.sig;
+        }  while (act!= ini);
+        throw new ColumnaNotFoundException();
+    }
+    
     //get columna by title
     public Columna getColumnaByName(String name) throws ListaVaciaException,ColumnaNotFoundException {
         if (estaVacia())

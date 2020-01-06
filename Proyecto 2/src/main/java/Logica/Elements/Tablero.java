@@ -40,6 +40,13 @@ public class Tablero {
     public Columna deleteCols(Columna c){
         return columnas.eliminarColumnaByName(c.nombre);
     }
+    public void moveBack(Columna c){
+        columnas.moveToBackByName(c.nombre);
+    }
+    
+    public void moveForward(Columna c){
+        columnas.moveToForwardByName(c.nombre);
+    }
 
     /*
     public static enum Visibility {
