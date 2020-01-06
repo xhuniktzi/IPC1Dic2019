@@ -77,8 +77,8 @@ public class PestañaTablero extends JPanel{
             columna.setBorder(border);
             
             columna.setLayout(new BorderLayout());
-            columna.setSize(360,480);
-            columna.setLocation(i*360, 0);
+            columna.setSize(280,480);
+            columna.setLocation(i*280, 0);
             
             JPanel botonesColumnas = new JPanel();
             botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -213,7 +213,7 @@ class BotonAñadirColumnas extends JButton{
 class BotonAñadirTarjetas extends JButton{
 
     public BotonAñadirTarjetas(Columna c) {
-        setText("AddTarjeta");
+        setText("Añadir");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -271,7 +271,7 @@ class BotonAñadirTarjetas extends JButton{
 class BotonEliminarTarjetas extends JButton{
 
     public BotonEliminarTarjetas(Columna c) {
-        setText("DeleteTarjeta");
+        setText("Eliminar");
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -341,6 +341,23 @@ class BotonModificarTarjetas extends JButton {
                         "Crear Tarjeta",
                         JOptionPane.QUESTION_MESSAGE,null,opt,opt[2]);
                 
+                Colaborador[] colabs = App.gestor.colaboradoresRegistrados.getArrayColaborador();
+                String[] optColabs = new String[colabs.length+1];
+                
+                optColabs[0] = "";
+                
+                for (int i = 0; i < colabs.length;i++){
+                    optColabs[i+1] = colabs[i].nickname;
+                }
+                
+                String colab = (String) JOptionPane.showInputDialog(null,
+                        "Selccione el colaborador vinculado a la tarjeta",
+                        "Escribir comentario",
+                        JOptionPane.QUESTION_MESSAGE,null,optColabs,optColabs[0]);
+                
+                if (nombre.equals(""))
+                    return;
+                
                 act.title = nombre;
                 act.desc = desc;
                 
@@ -351,20 +368,7 @@ class BotonModificarTarjetas extends JButton {
                 if(opcion.equals("Baja"))
                     act.prioridad = Tarjeta.Priority.BAJA;
                 
-                
-                Colaborador[] colabs = App.gestor.colaboradoresRegistrados.getArrayColaborador();
-                String[] optColabs = new String[colabs.length+1];
-                
-                optColabs[0] = "";
-                
-                for (int i = 0; i < colabs.length;i++){
-                    optColabs[i+1] = colabs[i].nickname;
-                }
-                
-                act.nickColaborador = (String) JOptionPane.showInputDialog(null,
-                        "Selccione el colaborador vinculado a la tarjeta",
-                        "Escribir comentario",
-                        JOptionPane.QUESTION_MESSAGE,null,optColabs,optColabs[0]);
+                act.nickColaborador = colab;
             }
         });
     }
