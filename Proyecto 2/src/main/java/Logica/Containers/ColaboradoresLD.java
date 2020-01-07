@@ -137,13 +137,14 @@ public class ColaboradoresLD {
         return datosAct;
     }
     
-    public Colaborador getColaboradorByNickname(String nickname) throws ListaVaciaException {
+    public Colaborador getColaboradorByNickname(String nickname) throws ListaVaciaException,ColaboradorNotFoundException {
         if (estaVacia())
             throw new ListaVaciaException(nombre);
         
         NodoColaboradorLD act = ini;
         while (act != null){
             if (act.dato.nickname.equals(nickname)){
+                System.out.println(act.dato.nickname + "=?" + nickname);
                 return act.dato;
             }
             act = act.sig;

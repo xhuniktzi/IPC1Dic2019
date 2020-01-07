@@ -49,6 +49,7 @@ public class ColaboradoresLS {
                 act = act.sig;
             }while (act != null);
             ant.sig = act = new NodoColaboradorLS(dato, null);
+            contador++;
         }
         
     }

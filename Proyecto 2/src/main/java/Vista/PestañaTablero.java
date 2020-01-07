@@ -593,7 +593,8 @@ class VentanaColabsTablero extends JFrame{
         model.addColumn("telefono");
         Colaborador[] colabs = t.getDataColabs();
         for (int i = 0; i < colabs.length; i++){
-            String[] datos = {colabs[i].nombre,
+            String[] datos = {
+                colabs[i].nombre,
                 colabs[i].nickname,
                 colabs[i].rol,
                 String.valueOf(colabs[i].telfono)};
@@ -647,6 +648,7 @@ class BotonAddColabsTab extends JButton{
                         "Seleccione el colaborador",
                         "añadir Colaborador",
                         JOptionPane.QUESTION_MESSAGE,null,opt,opt[0]);
+                //System.out.println("\"" + opcion + "\"");
                 try{
                     t.addColab(App.gestor.colaboradoresRegistrados.getColaboradorByNickname(opcion));
                 } catch (UnsupportedOperationException uoe){

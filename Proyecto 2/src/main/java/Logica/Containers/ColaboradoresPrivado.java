@@ -17,7 +17,7 @@ public class ColaboradoresPrivado extends ColaboradoresLS implements ManageColab
 
     @Override
     public void addColabs(Colaborador c) throws UnsupportedOperationException {
-        super.insertarColaborador(c);
+        super.insertarAlFinal(c);
     }
 
     @Override
