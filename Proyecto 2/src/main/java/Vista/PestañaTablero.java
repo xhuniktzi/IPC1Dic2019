@@ -19,6 +19,7 @@ import Logica.Elements.Tarjeta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -57,12 +58,13 @@ public class PestañaTablero extends JPanel{
         panelBotones.add(new BotonModificarTablero(tab));
         panelBotones.add(new BotonMostrarColabsTabs(tab));
         try{
-        panelBotones.add(new BotonGraphviz(App.toSave.getAbsolutePath(), tab));
+            panelBotones.add(new BotonGraphviz(App.toSave.getAbsolutePath(), tab));
         }
         catch (NullPointerException npe){
             //npe.printStackTrace();
         }
         JPanel content = new JPanel();
+        content.setPreferredSize(new Dimension(1080,720));
         try{
             content.setBackground(Color.decode(tab.hexColor));
         }
