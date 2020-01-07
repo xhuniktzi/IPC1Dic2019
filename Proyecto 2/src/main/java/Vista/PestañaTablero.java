@@ -21,7 +21,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -56,6 +55,7 @@ public class PestañaTablero extends JPanel{
         panelBotones.add(new BotonAñadirColumnas(tab));
         panelBotones.add(new BotonEliminarTablero(tab));
         panelBotones.add(new BotonModificarTablero(tab));
+        panelBotones.add(new BotonMostrarColabsTabs(tab));
         try{
         panelBotones.add(new BotonGraphviz(App.toSave.getAbsolutePath(), tab));
         }
@@ -79,7 +79,7 @@ public class PestañaTablero extends JPanel{
                 columna.setBorder(border);
 
                 columna.setLayout(new BorderLayout());
-                columna.setSize(300,480);
+                columna.setSize(300,560);
                 columna.setLocation(i*300, 0);
 
                 JPanel botonesColumnas = new JPanel();
@@ -334,7 +334,6 @@ class BotonModificarColumnas extends JButton{
 }
 
 class BotonEliminarColumnas extends JButton {
-
     public BotonEliminarColumnas(Columna col,Tablero tab) {
         setText("Eliminar Columna");
         addActionListener(new ActionListener() {
@@ -348,11 +347,9 @@ class BotonEliminarColumnas extends JButton {
             }
         });
     }
-    
 }
 
 class BotonModificarTarjetas extends JButton {
-
     public BotonModificarTarjetas(Tarjeta t) {
         setText("Modificar");
         addActionListener(new ActionListener() {
@@ -411,11 +408,9 @@ class BotonModificarTarjetas extends JButton {
             }
         });
     }
-    
 }
 
 class BotonComentarios extends JButton {
-
     public BotonComentarios(Tarjeta t) {
         setText("Comentarios");
         addActionListener(new ActionListener() {
@@ -424,9 +419,7 @@ class BotonComentarios extends JButton {
                 DialogComentarios d = new DialogComentarios(t);
             }
         });
-        
     }
-    
 }
 class DialogComentarios extends JDialog {
     DefaultTableModel model;
@@ -460,8 +453,8 @@ class DialogComentarios extends JDialog {
         content.add(panelBotones,BorderLayout.SOUTH);
     }
 }
-class BotonAñadirComentario extends JButton {
 
+class BotonAñadirComentario extends JButton {
     public BotonAñadirComentario(Tarjeta t) {
         setText("Añadir Comentario");
         addActionListener(new ActionListener() {
@@ -483,11 +476,9 @@ class BotonAñadirComentario extends JButton {
             }
         });
     }
-    
 }
 
 class BotonEliminarComentario extends JButton {
-
     public BotonEliminarComentario(Tarjeta t) {
         setText("Eliminar Comentario");
         addActionListener(new ActionListener() {
@@ -500,11 +491,9 @@ class BotonEliminarComentario extends JButton {
             }
         });
     }
-    
 }
 
 class BotonMoveColumnForward extends JButton {
-
     public BotonMoveColumnForward(Tablero t, Columna c) {
         setText(">>");
         addActionListener(new ActionListener() {
@@ -515,11 +504,9 @@ class BotonMoveColumnForward extends JButton {
             }
         });
     }
-    
 }
 
 class BotonMoveColumnBack extends JButton {
-
     public BotonMoveColumnBack(Tablero t, Columna c) {
         setText("<<");
         addActionListener(new ActionListener() {
@@ -530,7 +517,6 @@ class BotonMoveColumnBack extends JButton {
             }
         });
     }
-    
 }
 
 class BotonGraphviz extends JButton {
@@ -555,7 +541,6 @@ class BotonGraphviz extends JButton {
 }
 
 class ViewGraphviz extends JFrame{
-
     public ViewGraphviz(String ruta, Tablero tab) throws HeadlessException {
         super("Visualizar diagramas");
         String nameFile = tab.nombre.replace(" ", "");
@@ -570,6 +555,52 @@ class ViewGraphviz extends JFrame{
         */
         content.add(new JScrollPane(new JLabel(new ImageIcon(ruta + "/img/columna_" + nameFile + ".jpg"))));
         //repaint();
+    }
+}
+
+class BotonMostrarColabsTabs extends JButton{
+
+    public BotonMostrarColabsTabs(Tablero t) {
+        setText("Ver colaboradores");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaColabsTablero v = new VentanaColabsTablero(t);
+            }
+        });
+    }
+    
+}
+
+class VentanaColabsTablero extends JFrame{
+    JTable table;
+    DefaultTableModel model;
+    public VentanaColabsTablero(Tablero t) throws HeadlessException {
+        super("Mostrar Colaboradores");
+        setSize(420,480);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Container content = getContentPane();
+        
+        content.add(new JLabel("Mostrar colaboradores"),BorderLayout.NORTH);
+        
+        model = new DefaultTableModel();
+        table = new JTable(model);
+        
+        model.addColumn("nombre");
+        model.addColumn("nickname");
+        model.addColumn("rol");
+        model.addColumn("telefono");
+        Colaborador[] colabs = t.getDataColabs();
+        for (int i = 0; i < colabs.length; i++){
+            String[] datos = {colabs[i].nombre,
+                colabs[i].nickname,
+                colabs[i].rol,
+                String.valueOf(colabs[i].telfono)};
+            model.addRow(datos);
+        }
+        
+        content.add(new JScrollPane(table),BorderLayout.CENTER);
     }
     
 }

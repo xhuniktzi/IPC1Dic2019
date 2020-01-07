@@ -6,7 +6,10 @@
 package Logica.Elements;
 
 import Exceptions.InvalidNameColException;
+import Logica.Containers.ColaboradoresPrivado;
+import Logica.Containers.ColaboradoresPublico;
 import Logica.Containers.ColumnasCD;
+import Logica.ManageColabs;
 
 /**
  *
@@ -17,20 +20,25 @@ public class Tablero {
     //public Visibility visibilidad;
     public String hexColor;  //color en formato hexadecimal
     public ColumnasCD columnas;
+    public ManageColabs colabs;
     //public int contadorCols;
     //public ColaboradoresLS listaColabs; //ToDO: Reimplemntar con interfaces
     
 
     public Tablero(String nombre, String hexColor) {
-        //contadorCols = 0;
+        this(nombre, hexColor, Visibility.PUBLICO);
+    }
+    
+    public Tablero(String nombre, String hexColor, Visibility visible){
         this.nombre = nombre;
         this.columnas = new ColumnasCD("columnas",this);
-        //this.visibilidad = visibilidad;
         this.hexColor = hexColor;
-        //if (visibilidad == Visibility.PUBLICO)
-          //  listaColabs = App.gestor.getColaboradoresRegistrados();
-        
         addCols(new Columna("Lista de tareas"));
+        if (visible == Visibility.PUBLICO)
+            colabs = new ColaboradoresPublico();
+        if (visible ==Visibility.PRIVADO)
+            colabs = new ColaboradoresPrivado();
+        
     }
     
     public void addCols(Columna c) throws InvalidNameColException{
@@ -48,7 +56,18 @@ public class Tablero {
         columnas.moveToForwardByName(c.nombre);
     }
 
-    /*
+    public void addColab(Colaborador c) throws UnsupportedOperationException{
+        colabs.addColabs(c);
+    }
+    
+    public Colaborador delColab() throws UnsupportedOperationException{
+        return colabs.deleteColabs();
+    }
+    
+    public Colaborador[] getDataColabs(){
+        return colabs.getArrayColabs();
+    }
+    
     public static enum Visibility {
         PUBLICO,PRIVADO;
 
@@ -62,5 +81,5 @@ public class Tablero {
         }
         
     }
-*/
+
 }

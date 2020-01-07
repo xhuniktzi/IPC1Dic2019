@@ -18,7 +18,7 @@ public class MostrarTabs extends JFrame{
 
     public MostrarTabs() {
         super("Tableros");
-        setSize(720,600);
+        setSize(800,720);
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Container content = getContentPane();
