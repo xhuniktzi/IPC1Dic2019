@@ -59,10 +59,14 @@ public class PestañaTablero extends JPanel{
         panelBotones.add(new BotonModificarTablero(tab));
         panelBotones.add(new BotonMostrarColabsTabs(tab));
         try{
+            panelBotones.setBackground(Color.decode(tab.hexColor));
             panelBotones.add(new BotonGraphviz(App.toSave.getAbsolutePath(), tab));
         }
         catch (NullPointerException npe){
             //npe.printStackTrace();
+        }
+        catch (NumberFormatException nfe){
+            //nfe.printStackTrace();
         }
         JPanel content = new JPanel();
         //content.setPreferredSize(new Dimension(720,720));
@@ -71,7 +75,7 @@ public class PestañaTablero extends JPanel{
         }
         catch(NumberFormatException nfe){
         }
-        content.setLayout(new GridLayout(1, 25, 2, 2));
+        content.setLayout(new GridLayout(1, 25, 8, 8));
         Tablero tablero = App.gestor.getTablerosByTitle(tab.nombre);
         try{
             Columna[] cols = tablero.columnas.getArrayColumnas();
@@ -138,6 +142,10 @@ public class PestañaTablero extends JPanel{
                 botonesMover.add(new BotonMoveColumnForward(tab, cols[i]));
                 
                 JPanel generalButtons = new JPanel();
+                
+                
+                    generalButtons.setBackground(Color.decode(tab.hexColor));
+                
                 generalButtons.setLayout(new BoxLayout(generalButtons, BoxLayout.Y_AXIS));
                 generalButtons.add(botonesColumnas);
                 generalButtons.add(botonesColumnas2);
