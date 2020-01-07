@@ -340,7 +340,11 @@ class BotonEliminarColumnas extends JButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tab.deleteCols(col);
+                int resp = JOptionPane.showConfirmDialog(null, "Vas a eliminar una columna, ¿Estas seguro?",
+                            "Confirmacion",JOptionPane.YES_NO_OPTION);
+                
+                if (resp == 0)
+                    tab.deleteCols(col);
             }
         });
     }
@@ -556,7 +560,7 @@ class ViewGraphviz extends JFrame{
         super("Visualizar diagramas");
         String nameFile = tab.nombre.replace(" ", "");
         setVisible(true);
-        setSize(560,560);
+        setSize(360,480);
         
         Container content = getContentPane();
         content.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -565,6 +569,7 @@ class ViewGraphviz extends JFrame{
         imageColabs.add(new JLabel(new ImageIcon(ruta + "/img/colaboradores.jpg")));
         */
         content.add(new JScrollPane(new JLabel(new ImageIcon(ruta + "/img/columna_" + nameFile + ".jpg"))));
+        //repaint();
     }
     
 }

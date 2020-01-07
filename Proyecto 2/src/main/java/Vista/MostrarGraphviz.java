@@ -23,7 +23,7 @@ public class MostrarGraphviz extends JFrame{
     public MostrarGraphviz(String ruta) throws HeadlessException {
         super("Visualizar diagramas");
         setVisible(true);
-        setSize(560,560);
+        setSize(360,480);
         
         Container content = getContentPane();
         content.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -33,7 +33,7 @@ public class MostrarGraphviz extends JFrame{
         */
         content.add(new JScrollPane(new JLabel(new ImageIcon(ruta + "/img/colaboradores.jpg"))));
         content.add(new JScrollPane(new JLabel(new ImageIcon(ruta + "/img/tableros.jpg"))));
-        
+        //super.repaint();
     }
     
 }
