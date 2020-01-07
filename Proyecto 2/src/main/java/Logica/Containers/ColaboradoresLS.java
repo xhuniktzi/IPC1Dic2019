@@ -84,7 +84,7 @@ public class ColaboradoresLS {
         Colaborador datosAct = ini.dato;
         
         ini = ini.sig;
-        
+        contador--;
         return datosAct;
     }
     
@@ -105,7 +105,7 @@ public class ColaboradoresLS {
         }
         return dato;
     }
-    
+    /*
     public Colaborador eliminarColaborador(String nick) throws InvalidNickException{
         if (!checkExistsNickname(nick)){
             throw new InvalidNickException();
@@ -142,6 +142,7 @@ public class ColaboradoresLS {
         }
         
     }
+    */
     
     public boolean estaVacia(){
         return (ini == null);

@@ -41,6 +41,13 @@ public class Tablero {
         
     }
     
+    public void changeVisibility(Visibility visible){
+        if (visible == Visibility.PUBLICO)
+            colabs = new ColaboradoresPublico();
+        if (visible == Visibility.PRIVADO)
+            colabs = new ColaboradoresPrivado();
+    }
+    
     public void addCols(Columna c) throws InvalidNameColException{
         columnas.insertar(c);
         //contadorCols++;

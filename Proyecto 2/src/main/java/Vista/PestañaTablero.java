@@ -600,7 +600,61 @@ class VentanaColabsTablero extends JFrame{
             model.addRow(datos);
         }
         
+        JPanel comandos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        comandos.add(new BotonCambiarVisibilidad(t));
+        comandos.add(new BotonAddColabsTab(t));
+        
         content.add(new JScrollPane(table),BorderLayout.CENTER);
+        content.add(comandos,BorderLayout.SOUTH);
+    }
+}
+
+class BotonCambiarVisibilidad extends JButton{
+
+    public BotonCambiarVisibilidad(Tablero t) {
+        setText("Cambiar Visibilidad");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] opt = {"Publico","Privado"};
+                String opcion =(String) JOptionPane.showInputDialog(null,
+                        "Selccione el colaborador que escribe",
+                        "Escribir comentario",
+                        JOptionPane.QUESTION_MESSAGE,null,opt,opt[0]);
+                if (opcion.equals("Publico"))
+                    t.changeVisibility(Tablero.Visibility.PUBLICO);
+                if (opcion.equals("Privado"))
+                    t.changeVisibility(Tablero.Visibility.PRIVADO);
+            }
+        });
+    }
+}
+class BotonAddColabsTab extends JButton{
+
+    public BotonAddColabsTab(Tablero t) {
+        setText("Añadir colaboradores");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Colaborador[] colabs = App.gestor.colaboradoresRegistrados.getArrayColaborador();
+                String[] opt = new String[colabs.length];
+                
+                for (int i = 0; i < colabs.length; i++){
+                    opt[i] = colabs[i].nickname;
+                }
+                
+                String opcion = (String) JOptionPane.showInputDialog(null,
+                        "Seleccione el colaborador",
+                        "añadir Colaborador",
+                        JOptionPane.QUESTION_MESSAGE,null,opt,opt[0]);
+                try{
+                    t.addColab(App.gestor.colaboradoresRegistrados.getColaboradorByNickname(opcion));
+                } catch (UnsupportedOperationException uoe){
+                    JOptionPane.showMessageDialog(null, "operacion invalida, para tipos publicos",
+                            "Validacion", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
     }
     
 }
