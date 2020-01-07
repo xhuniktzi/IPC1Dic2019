@@ -46,6 +46,7 @@ public class ColaboradoresLD {
         if (estaVacia()){
             insertarAlFinal(c);
             contador++;
+            ordenarColaboradores();
         }
         else {
             if (checkExistsNickname(c.nickname))
@@ -58,11 +59,13 @@ public class ColaboradoresLD {
                         if (c.nickname.compareToIgnoreCase(act.dato.nickname) > 0){
                             insertarAlFinal(c);
                             contador++;
+                            ordenarColaboradores();
                             return;
                         }
                         else {
                             insertarAlFrente(c);
                             contador++;
+                            ordenarColaboradores();
                             return;
                         }
                     }
@@ -71,6 +74,7 @@ public class ColaboradoresLD {
                         act.sig.ant = nuevo;
                         act.sig = nuevo;
                         contador++;
+                        ordenarColaboradores();
                         return;
                     }
                     act = act.sig;
@@ -133,7 +137,7 @@ public class ColaboradoresLD {
         return datosAct;
     }
     
-    public Colaborador getColaboradorByNickname(String nickname){
+    public Colaborador getColaboradorByNickname(String nickname) throws ListaVaciaException {
         if (estaVacia())
             throw new ListaVaciaException(nombre);
         
@@ -187,6 +191,40 @@ public class ColaboradoresLD {
         }
         return retorno;
     }
+    
+    public void ordenarColaboradores(){
+        if(estaVacia())
+            throw new ListaVaciaException(nombre);
+        
+        Colaborador[] listaColaboradores = new Colaborador[contador];
+        NodoColaboradorLD act = ini;
+        int i = 0;
+        while (act != null){
+            listaColaboradores[i] = act.dato;
+            act = act.sig;
+            i++;
+        }
+        
+        int n = 0;
+        for (int j = 0; j < listaColaboradores.length; j++){
+            Colaborador aux = listaColaboradores[j];
+            n = j;
+            while (n > 0 && listaColaboradores[n-1].nickname.compareToIgnoreCase(aux.nickname)>0){
+                listaColaboradores[n] = listaColaboradores [n-1];
+                --n;
+            }
+            listaColaboradores[n] = aux;
+        }
+        
+        int k = 0;
+        NodoColaboradorLD actAux = ini;
+        while (actAux != null){
+            actAux.dato = listaColaboradores[k];
+            actAux = actAux.sig;
+            k++;
+        }
+    }
+   
     
     public void drawGraphviz(String ruta) throws IOException{
         String path = ruta + "/dot/colaboradores.dot";
