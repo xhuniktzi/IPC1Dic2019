@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,13 +65,13 @@ public class PestañaTablero extends JPanel{
             //npe.printStackTrace();
         }
         JPanel content = new JPanel();
-        content.setPreferredSize(new Dimension(1080,720));
+        //content.setPreferredSize(new Dimension(720,720));
         try{
             content.setBackground(Color.decode(tab.hexColor));
         }
         catch(NumberFormatException nfe){
         }
-        content.setLayout(null);
+        content.setLayout(new GridLayout(1, 25, 2, 2));
         Tablero tablero = App.gestor.getTablerosByTitle(tab.nombre);
         try{
             Columna[] cols = tablero.columnas.getArrayColumnas();
@@ -81,8 +82,9 @@ public class PestañaTablero extends JPanel{
                 columna.setBorder(border);
 
                 columna.setLayout(new BorderLayout());
-                columna.setSize(300,560);
-                columna.setLocation(i*300, 0);
+                //columna.setSize(new Dimension(300,560));
+                //columna.setSize(300,560);
+                //columna.setLocation(i*300, 0);
 
                 JPanel botonesColumnas = new JPanel();
                 botonesColumnas.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -142,13 +144,13 @@ public class PestañaTablero extends JPanel{
                 generalButtons.add(botonesMover);
 
                 columna.add(generalButtons,BorderLayout.SOUTH);
-                content.add(columna);
-                add(new JScrollPane(content),BorderLayout.CENTER);
+                content.add(columna,0,i);
+                
             }
         } catch (ListaVaciaException lve){
             lve.printStackTrace();
         }
-        
+        add(new JScrollPane(content),BorderLayout.CENTER);
         add(panelBotones,BorderLayout.SOUTH);
     }
     
